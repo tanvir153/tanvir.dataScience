@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NumPy Module | Tanvir Teaches Data Science</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9fb; }
+    .header { background: linear-gradient(to right, #005c97, #363795); color: white; padding: 60px 20px; text-align: center; }
+    #pageNav { border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+    #pageNav button:disabled { opacity: 0.5; cursor: not-allowed; }
+    pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    .code-actions { display: flex; gap: 8px; margin-top: 0.5em; }
+    .copy-btn, .try-btn { padding: 4px 8px; font-size: 12px; border: 1px solid; border-radius: 3px; cursor: pointer; }
+    .copy-btn { background: #fff; color: #333; border-color: #ccc; }
+    .try-btn { background: #f0f8ff; color: #0d6efd; border-color: #0d6efd; }
+    .copy-btn:hover { background: #f8f8f8; }
+    .try-btn:hover  { background: #e1efff; }
+    .editor-modal { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    .editor-container { background: #fff; width: 80%; max-width: 800px; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+    .editor-header { background: #f5f5f5; padding: 8px; text-align: right; }
+    .close-btn { background: none; border: none; font-size: 1.5em; cursor: pointer; }
+    .editor { height: 300px; }
+    .editor-actions { padding: 8px; background: #fafafa; display: flex; gap: 8px; }
+    .run-btn, .check-btn { padding: 6px 12px; border: none; cursor: pointer; font-size: 0.9em; border-radius: 4px; }
+    .run-btn { background: #0d6efd; color: #fff; }
+    .check-btn { background: #198754; color: #fff; }
+    .output { background: #1e1e1e; color: #ddd; padding: 12px; margin: 0; height: 120px; overflow-y: auto; font-family: monospace; }
+    .check-result { padding: 8px; font-weight: bold; text-align: center; }
+    .sidebar { position: sticky; top:20px; background:#fff; padding:15px; border-right:1px solid #ddd; height:calc(100vh - 40px); overflow-y:auto; }
+    .sidebar a { display:block; margin-bottom:10px; color:#333; text-decoration:none; }
+    .sidebar a:hover { text-decoration:underline; }
+    @media (max-width:768px) { .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; } }
+  </style>
+</head>
+<body tabindex="0">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>🔢 NumPy Module</h1>
+    <p class="lead">Efficient array computing and vectorized operations in Python</p>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <nav class="col-md-3 sidebar" id="lesson-nav">
+        <h5 class="fw-bold mb-3">NumPy Roadmap</h5>
+        <a href="#intro">1. Introduction</a>
+        <a href="#install">2. Installation</a>
+        <a href="#array">3. ndarray</a>
+        <a href="#creation">4. Array Creation</a>
+        <a href="#dtype">5. Data Types</a>
+        <a href="#indexing">6. Indexing</a>
+        <a href="#slicing">7. Slicing</a>
+        <a href="#math">8. Basic Math</a>
+        <a href="#ufuncs">9. Universal Functions</a>
+        <a href="#broadcasting">10. Broadcasting</a>
+        <a href="#shape">11. Shape Manipulation</a>
+        <a href="#concat">12. Concatenate & Split</a>
+        <a href="#random">13. Random Module</a>
+        <a href="#linear">14. Linear Algebra</a>
+        <a href="#stats">15. Statistics</a>
+        <a href="#masking">16. Boolean Masking</a>
+        <a href="#iteration">17. Iteration</a>
+        <a href="#performance">18. Performance Tips</a>
+        <a href="#io">19. I/O with Files</a>
+        <a href="#projects">20. Mini-Projects</a>
+      </nav>
+
+  <div class="col-md-9 py-4 px-4">
+  <div id="pageNav" class="d-flex justify-content-between align-items-center my-3">
+    <button id="prevPageBtn" class="btn btn-outline-primary">Prev Page</button>
+    <span id="pageIndicator">Page 1 / 4</span>
+    <button id="nextPageBtn" class="btn btn-outline-primary">Next Page</button>
+  </div>
+
+  <section id="intro" class="mb-5">
+    <h2>1. Introduction</h2>
+    <p>
+      NumPy is the foundation of numerical computing in Python. By providing a fast,
+      N-dimensional <code>ndarray</code>, it enables vectorized operations, which
+      leverage optimized C loops under the hood for speed-ups of 10–100× compared to
+      pure-Python lists. Understanding NumPy unlocks efficient data processing,
+      scientific computing, and machine learning workflows.
+    </p>
+  </section>
+
+  <section id="install" class="mb-5">
+    <h2>2. Installation</h2>
+    <p>Install via pip or conda. Always keep NumPy up-to-date for performance patches:</p>
+    <pre><code>pip install --upgrade numpy</code></pre>
+  </section>
+
+  <section id="array" class="mb-5">
+    <h2>3. ndarray</h2>
+    <p>
+      An <code>ndarray</code> stores homogeneous items in contiguous memory. Key attributes:
+      <ul>
+        <li><strong><code>shape</code></strong>: dimensions (rows, cols, …)</li>
+        <li><strong><code>dtype</code></strong>: data type (e.g., <code>int64</code>, <code>float32</code>)</li>
+        <li><strong><code>strides</code></strong>: byte-steps to traverse each dimension</li>
+      </ul>
+    </p>
+    <pre><code>import numpy as np
+arr = np.array([1, 2, 3])
+print("arr:", arr)
+print("shape:", arr.shape)
+print("dtype:", arr.dtype)
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="arr: [1 2 3]\nshape: (3,)\ndtype: int64" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="creation" class="mb-5">
+    <h2>4. Array Creation</h2>
+    <p>
+      NumPy offers factory functions to create arrays rapidly without loops:
+      <ul>
+        <li><code>zeros</code>: all zeros</li>
+        <li><code>ones</code>: all ones</li>
+        <li><code>arange</code>: like <code>range()</code></li>
+        <li><code>linspace</code>: evenly spaced values</li>
+        <li><code>eye</code>: identity matrix</li>
+      </ul>
+    </p>
+    <pre><code>z = np.zeros((2, 3))      # 2×3 zeros
+r = np.arange(0, 10, 2)    # [0,2,4,6,8]
+l = np.linspace(0, 1, 5)   # [0.,0.25,0.5,0.75,1.]
+i = np.eye(3)              # 3×3 identity
+print(z, r, l, i)
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[[0. 0. 0.] [0. 0. 0.]] [0 2 4 6 8] [0.   0.25 0.5  0.75 1.  ] [[1. 0. 0.] [0. 1. 0.] [0. 0. 1.]]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="dtype" class="mb-5">
+    <h2>5. Data Types</h2>
+    <p>
+      Control storage size and precision with <code>dtype</code>. Conversions use views or copies:
+    </p>
+    <pre><code>f32 = np.array([1.1, 2.2], dtype=np.float32)
+i32 = f32.astype(np.int32)
+print(f32.dtype, i32.dtype)
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="float32 int32" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="indexing" class="mb-5">
+    <h2>6. Indexing</h2>
+    <p>
+      Access elements by integer, slice, or boolean array. Indexing returns views, not copies:
+    </p>
+    <pre><code>arr = np.array([10,20,30,40])
+print(arr[1])       # 20
+print(arr[[0,2]])   # [10,30]
+mask = arr > 25
+print(arr[mask])    # [30,40]
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="20\n[10 30]\n[30 40]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="slicing" class="mb-5">
+    <h2>7. Slicing</h2>
+    <p>
+      Slice arrays like Python lists but returns a view into the original data.
+      Modifying a slice changes the parent array.
+    </p>
+    <pre><code>arr = np.arange(10)
+slice = arr[2:8:2]
+print(slice)      # [2 4 6]
+slice[:] = 99
+print(arr)        # slice idxs set to 99
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[2 4 6]\n[ 0  1 99  3 99  5 99  7  8  9]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="math" class="mb-5">
+    <h2>8. Basic Math</h2>
+    <p>
+      Vectorized arithmetic applies operations elementwise without Python loops:
+    </p>
+    <pre><code>a = np.array([1,2])
+b = np.array([3,4])
+print(a + b)   # [4,6]
+print(a * b)   # [3,8]
+print(a / b)   # [0.3333,0.5]
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[4 6]\n[3 8]\n[0.33333333 0.5       ]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="ufuncs" class="mb-5">
+    <h2>9. Universal Functions</h2>
+    <p>
+      Fast C-implemented functions for array-wide math:
+    </p>
+    <pre><code>print(np.sqrt([1,4,9]))   # [1,2,3]
+print(np.exp([0,1]))       # [1,2.718]
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[1. 2. 3.]\n[1.         2.71828183]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="broadcasting" class="mb-5">
+    <h2>10. Broadcasting</h2>
+    <p>
+      Broadcasting stretches arrays to compatible shapes for elementwise ops without data copies.
+      It's the engine behind concise tensor math.
+    </p>
+    <pre><code>a = np.array([[1,2],[3,4]])
+v = np.array([10,20])
+# v broadcast to [[10,20],[10,20]]:
+print(a + v)
+# [[11,22],[13,24]]
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[[11 22]\n [13 24]]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="shape" class="mb-5">
+    <h2>11. Shape Manipulation</h2>
+    <p>Reshape, transpose, flatten arrays to prepare data or adjust dims:</p>
+    <pre><code>a = np.arange(6)
+b = a.reshape(2,3).T.flatten()
+print(b)  # [0,3,1,4,2,5]
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[0 3 1 4 2 5]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="concat" class="mb-5">
+    <h2>12. Concatenate &amp; Split</h2>
+    <p>Join multiple arrays or split into sub-arrays:</p>
+    <pre><code>a = np.array([1,2])
+b = np.array([3,4])
+print(np.concatenate([a,b]))
+print(np.split(np.arange(6),3))
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[1 2 3 4]\n[array([0,1]), array([2,3]), array([4,5])]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="random" class="mb-5">
+    <h2>13. Random Module</h2>
+    <p>Generate random samples for simulations & testing:</p>
+    <pre><code>print(np.random.rand(2,2))         # uniform [0,1)
+print(np.random.randint(0,10,5))    # ints 0–9
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="linear" class="mb-5">
+    <h2>14. Linear Algebra</h2>
+    <p>Use optimized routines for matrix math:</p>
+    <pre><code>a = np.array([[1,2],[3,4]])
+print(a.dot(a))                 # matrix multiply
+print(np.linalg.det(a))         # determinant
+print(np.linalg.inv(a))         # inverse
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[[ 7 10]\n [15 22]]\n-2.0\n[[-2.   1. ]\n [ 1.5 -0.5]]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="stats" class="mb-5">
+    <h2>15. Statistics</h2>
+    <p>Compute summary statistics quickly:</p>
+    <pre><code>a = np.array([1,2,3,4])
+print(a.mean(), a.std(), a.sum())  # 2.5 1.1180 10
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="2.5 1.118033988749895 10" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="masking" class="mb-5">
+    <h2>16. Boolean Masking</h2>
+    <p>Filter elements with boolean conditions:</p>
+    <pre><code>a = np.arange(10)
+print(a[a % 2 == 0])  # even numbers
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="[0 2 4 6 8]" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="iteration" class="mb-5">
+    <h2>17. Iteration</h2>
+    <p>Efficient element-wise iteration with <code>np.nditer</code>:</p>
+    <pre><code>a = np.array([[1,2],[3,4]])
+for x in np.nditer(a): print(x, end=' ')
+# 1 2 3 4
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="1 2 3 4 " onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="performance" class="mb-5">
+    <h2>18. Performance Tips</h2>
+    <p>
+      Always prefer vectorized NumPy functions over Python loops. Benchmark with IPython:
+    </p>
+    <pre><code># Pure Python
+ t0 = %timeit -o sum([i*i for i in range(1_000_000)])
+ # NumPy vectorized
+ arr = np.arange(1_000_000)
+ t1 = %timeit -o arr.sum()
+ print(f"Speedup: {t0.average/t1.average:.1f}×")
+</code></pre>
+  </section>
+
+  <section id="io" class="mb-5">
+    <h2>19. I/O with Files</h2>
+    <p>Save/load text and binary for interoperability:</p>
+    <pre><code>a = np.arange(5)
+ np.savetxt('data.txt', a)
+ b = np.loadtxt('data.txt')
+ print(b)
+</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <section id="projects" class="mb-5">
+    <h2>20. Mini-Projects</h2>
+    <ul>
+      <li><strong>Image Normalization:</strong> Load an image array, scale pixel values to [0,1], and visualize using Matplotlib.</li>
+      <li><strong>Statistical Dashboard:</strong> Read CSV into a NumPy array, compute histograms, means, and plot bar charts.</li>
+      <li><strong>Random Walk Simulator:</strong> Simulate 1D and 2D random walks and animate trajectories with Matplotlib.</li>
+    </ul>
+  </section>
+  <!-- 1) Modal HTML -->
+<div id="editorModal" class="editor-modal">
+  <div class="editor-container">
+    <div class="editor-header">
+      <button onclick="closeEditor()" class="close-btn">&times;</button>
+    </div>
+    <div id="editor" class="editor"></div>
+    <div class="editor-actions">
+      <button onclick="runCode()" class="run-btn">Run ▶️</button>
+      <button onclick="checkCode()" class="check-btn">Check ✅</button>
+    </div>
+    <pre id="output" class="output"></pre>
+    <div id="checkResult" class="check-result"></div>
+  </div>
+</div>
+
+<!-- 2) ACE Editor -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.11.2/ace.js"></script>
+
+<!-- 3) Skulpt (Python‐in‐browser) -->
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+
+</div>
+
+  <script>
+// 1️⃣ Pagination & Sidebar Sync
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = Array.from(document.querySelectorAll('section'));
+  const perPage  = 5;
+  const totalPages = Math.ceil(sections.length / perPage);
+  let currentPage = 1;
+  const prevBtn = document.getElementById('prevPageBtn');
+  const nextBtn = document.getElementById('nextPageBtn');
+  const indicator = document.getElementById('pageIndicator');
+  const links = Array.from(document.querySelectorAll('#lesson-nav a'));
+
+  function renderPage() {
+    sections.forEach((sec,i) => {
+      const pageIdx = Math.floor(i/perPage)+1;
+      sec.style.display = (pageIdx===currentPage)?'block':'none';
+    });
+    prevBtn.disabled = currentPage===1;
+    nextBtn.disabled = currentPage===totalPages;
+    indicator.textContent = `Page ${currentPage} / ${totalPages}`;
+  }
+
+  prevBtn.onclick = () => { if(currentPage>1){ currentPage--; renderPage(); } };
+  nextBtn.onclick = () => { if(currentPage<totalPages){ currentPage++; renderPage(); } };
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.getAttribute('href').slice(1);
+      const idx = sections.findIndex(s => s.id===target);
+      if (idx>-1) {
+        currentPage = Math.floor(idx/perPage)+1;
+        renderPage();
+        document.getElementById(target).scrollIntoView({behavior:'smooth'});
+      }
+    });
+  });
+
+  // Highlight sidebar based on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(ent => {
+      if (ent.isIntersecting) {
+        links.forEach(l=>l.classList.remove('active'));
+        const a = document.querySelector(`#lesson-nav a[href="#${ent.target.id}"]`);
+        a && a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.6 });
+  sections.forEach(sec => obs.observe(sec));
+
+  renderPage();
+});
+
+// 2️⃣ Copy-to-Clipboard for code blocks
+function copyCode(btn) {
+  const code = btn.closest('section').querySelector('pre code').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(()=> btn.textContent='Copy', 1500);
+  });
+}
+
+// 3️⃣ “Try It” Modal (Skulpt + ACE)
+let editor, expected;
+function openEditorModal(btn) {
+  const sec = btn.closest('section');
+  const code = sec.querySelector('pre code').innerText.trim();
+  expected = btn.dataset.expected || '';
+  document.getElementById('editorModal').style.display = 'flex';
+  if (!editor) {
+    editor = ace.edit('editor');
+    editor.setTheme('ace/theme/github');
+    editor.session.setMode('ace/mode/python');
+  }
+  editor.setValue(code, -1);
+  document.getElementById('output').innerText = '';
+  document.getElementById('checkResult').innerText = '';
+}
+function closeEditor() {
+  document.getElementById('editorModal').style.display = 'none';
+}
+function runCode() {
+  const outf = txt=> document.getElementById('output').innerText += txt;
+  const readf = f => {
+    if (!Sk.builtinFiles?.files[f]) throw `File not found: ${f}`;
+    return Sk.builtinFiles.files[f];
+  };
+  document.getElementById('output').innerText = '';
+  Sk.configure({output: outf, read: readf});
+  Sk.pre = 'output';
+  Sk.misceval.asyncToPromise(()=> Sk.importMainWithBody('<stdin>', false, editor.getValue()))
+    .catch(err=> outf(err.toString()));
+}
+function checkCode() {
+  const actual = document.getElementById('output').innerText.trim();
+  const res = document.getElementById('checkResult');
+  if (expected && actual === expected) {
+    res.style.color = '#198754'; res.textContent = '✅ Correct!';
+  } else {
+    res.style.color = '#dc3545';
+    res.textContent = `❌ Got "${actual}", expected "${expected}"`;
+  }
+}
+
+// 4️⃣ Initialize AOS (if you’re using it elsewhere)
+AOS && AOS.init({ duration:700, once:true, anchorPlacement:'top-bottom' });
+</script>
+
+</body>
+</html>

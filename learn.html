@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn Data Science | Tanvir DS</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons (if you want to add icons later) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+    }
+    .header {
+      background: linear-gradient(to right, #b0c402, #0950eb);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .project-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    .btn-sm {
+      margin-right: 5px;
+    }
+    .section-title {
+      margin: 40px 0 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header" data-aos="fade-up">
+    <h1>📘 Start Learning Data Science</h1>
+    <p class="lead">From Python basics to Machine Learning and beyond</p>
+  </header>
+
+  <!-- Learning Modules -->
+  <section class="container py-5" data-aos="fade-up" data-aos-delay="100">
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Available Modules</h2>
+    <div class="row g-4" data-aos="fade-up" data-aos-delay="300">
+      
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+        <div class="card project-card p-3 h-100">
+          <h5>Python Basics</h5>
+          <p>Learn syntax, variables, data types, loops, and functions.</p>
+          <a href="learn-python.html" class="btn btn-primary btn-sm">Start</a>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="500">
+        <div class="card project-card p-3 h-100">
+          <h5>NumPy</h5>
+          <p>Explore data manipulation and numerical computing with hands-on examples.</p>
+          <a href="learn-numpy.html" class="btn btn-primary btn-sm">Start</a>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
+        <div class="card project-card p-3 h-100">
+          <h5>Data Visualization</h5>
+          <p>Visualize insights using Matplotlib, Seaborn, and Plotly.</p>
+          <a href="learn-viz.html" class="btn btn-primary btn-sm">Start</a>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="700">
+        <div class="card project-card p-3 h-100">
+          <h5>Machine Learning</h5>
+          <p>Understand regression, classification, model building, and evaluation.</p>
+          <a href="learn-ml.html" class="btn btn-primary btn-sm">Start</a>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="800">
+        <div class="card project-card p-3 h-100">
+          <h5>Deep Learning</h5>
+          <p>Train neural networks with TensorFlow and Keras.</p>
+          <a href="learn-dl.html" class="btn btn-primary btn-sm">Start</a>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="900">
+        <div class="card project-card p-3 h-100">
+          <h5>End-to-End Projects</h5>
+          <p>Real-world ML projects with data, code, and visuals.</p>
+          <a href="projects.html" class="btn btn-primary btn-sm">Explore Projects</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-dark text-light mt-5" data-aos="fade-up" data-aos-delay="1000">
+    <p>© 2025 Tanvir Sardarr | 
+      <a href="https://github.com/yourgithub" class="text-warning">GitHub</a> | 
+      <a href="mailto:you@example.com" class="text-warning">Email</a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap & AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+</body>
+</html>

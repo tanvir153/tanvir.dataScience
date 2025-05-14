@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BurnoutGuard | Tanvir DS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fcfcfc;
+    }
+    .header {
+      background: linear-gradient(to right, #7b4397, #dc2430);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    img.chart {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+    .section-title {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Tanvir DS</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="header">
+  <h1>BurnoutGuard</h1>
+  <p class="lead">An AI-powered journaling and forecasting tool to detect burnout risk</p>
+</header>
+
+<!-- Content -->
+<section class="container py-5">
+
+  <h2 class="section-title"> Project Overview</h2>
+  <p><strong>BurnoutGuard</strong> is an intelligent mental health support tool that detects early signs of emotional exhaustion, stress, and burnout using a combination of sentiment analysis, journaling, and time-series prediction. It’s designed for students, employees, and researchers to track their mental wellbeing over time.</p>
+
+  <h2 class="section-title">Technologies Used</h2>
+  <ul>
+    <li>GPT-3.5 based journal sentiment analysis</li>
+    <li>Emotion classification using DistilBERT</li>
+    <li>Time series forecasting (ARIMA + LSTM)</li>
+    <li>Flask backend with REST API</li>
+    <li>Matplotlib and Plotly for visualization</li>
+  </ul>
+
+  <h2 class="section-title"> Forecast & Sentiment Graphs</h2>
+  <p>The system extracts mood/emotion metrics from text and predicts burnout trends over time.</p>
+  <img src="assets/burnout-sentiment-line.png" alt="Sentiment Over Time" class="chart" />
+  <img src="assets/burnout-forecast.png" alt="Burnout Forecast Chart" class="chart" />
+
+  <h2 class="section-title">Try the BurnoutGuard Demo</h2>
+  <p>You can write or paste your daily journal and get real-time burnout risk feedback:</p>
+  <a href="https://your-flask-demo-link" target="_blank" class="btn btn-danger">📝 Launch Burnout Detector</a>
+
+  <h2 class="section-title">Project Resources</h2>
+  <a href="https://github.com/yourgithub/burnoutguard" target="_blank" class="btn btn-outline-dark btn-sm">GitHub Repo</a>
+  <a href="https://colab.research.google.com/your-colab-link" target="_blank" class="btn btn-outline-primary btn-sm">Open in Colab</a>
+
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-4 bg-dark text-light mt-5">
+  <p>© 2025 Tanvir Sardarr | <a href="https://github.com/yourgithub" class="text-warning">GitHub</a> | <a href="mailto:you@example.com" class="text-warning">Email</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

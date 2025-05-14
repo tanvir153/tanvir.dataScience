@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tanvir Teaches Data Science</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f9;
+    }
+    .hero {
+      background: linear-gradient(to right, #0f2027, #110484, #2c5364);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .section-title {
+      margin: 50px 0 20px;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .card:hover {
+      transform: scale(1.02);
+      transition: 0.3s ease;
+    }
+    .why-choose-us {
+      background: #fff;
+      padding: 60px 20px;
+    }
+    .icon-box {
+      text-align: center;
+      padding: 20px;
+    }
+    .icon-box i {
+      font-size: 40px;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Tanvir DS</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" data-aos="fade-up">
+  <div class="container">
+    <h1 class="display-5">Master Data Science with Tanvir</h1>
+    <p class="lead">Hands-on learning. Real-world projects. Free and forever.</p>
+    <a href="#learn" class="btn btn-light mt-3">Start Learning</a>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why-choose-us" id="why-us">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">🌟 Why Choose This Platform?</h2>
+    <div class="row g-4 mt-4">
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="icon-box shadow-sm bg-white rounded">
+          <i class="bi bi-code-slash"></i>
+          <h5>Code-First Learning</h5>
+          <p>Every concept is taught with live code, hands-on exercises, and Colab notebooks.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="icon-box shadow-sm bg-white rounded">
+          <i class="bi bi-bar-chart-line"></i>
+          <h5>Real Projects</h5>
+          <p>Work on real-world datasets and solve business problems with machine learning.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon-box shadow-sm bg-white rounded">
+          <i class="bi bi-cpu"></i>
+          <h5>Interactive Tools</h5>
+          <p>Try live models, forecast trends, or test your own data with custom tools.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learn Section -->
+<section id="learn" class="container py-5">
+  <h2 class="section-title" data-aos="fade-up">📘 Learning Modules</h2>
+  <div class="row g-4" data-aos="fade-up">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Python Basics</h5>
+        <p>Variables, loops, functions, and data structures</p>
+        <a href="learn-python.html" class="btn btn-primary btn-sm">Start Module</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Pandas & NumPy</h5>
+        <p>Data manipulation and analysis using Python</p>
+        <a href="learn-pandas.html" class="btn btn-primary btn-sm">Start Module</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h5>Machine Learning</h5>
+        <p>Learn algorithms, model building, and evaluation</p>
+        <a href="learn-ml.html" class="btn btn-primary btn-sm">Start Module</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="container py-5">
+  <h2 class="section-title" data-aos="fade-up"> Featured Projects</h2>
+  <div class="row g-4" data-aos="fade-up">
+    <div class="col-md-4">
+      <div class="card h-100 p-3">
+        <h5>Dropout Risk Predictor</h5>
+        <p>Predict student dropout risk using ML and visualize risk levels.</p>
+        <a href="project-dropout.html" class="btn btn-outline-dark btn-sm">View Project</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 p-3">
+        <h5>BurnoutGuard</h5>
+        <p>AI-powered burnout prediction with journaling insights and forecasting.</p>
+        <a href="project-burnout.html" class="btn btn-outline-dark btn-sm">View Project</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 p-3">
+        <h5>Supply Chain Forecast</h5>
+        <p>Time-series ML model to predict product demand with Monte Carlo simulation.</p>
+        <a href="project-supply.html" class="btn btn-outline-dark btn-sm">View Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" class="text-center py-4 bg-dark text-light mt-5">
+  <p>© 2025 Tanvir Sardarr | <a href="https://github.com/tanvir153" class="text-warning">GitHub</a> | <a href="mailto:tanvir.xf@gmail.com" class="text-warning">Email Me</a></p>
+</footer>
+
+<!-- Bootstrap & AOS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<script>AOS.init();</script>
+
+</body>
+</html>

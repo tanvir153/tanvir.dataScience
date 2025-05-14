@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me | Tanvir Teaches Data Science</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <!-- AOS CSS -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .header {
+      background: linear-gradient(135deg, #cc2b5e, #753a88, #2bd955);
+      background-size: 200% 200%;
+      animation: gradientShift 10s ease infinite;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+    .skills i {
+      font-size: 30px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header" data-aos="fade-up">
+    <img src="pp.jpg"
+         alt="Tanvir Sardarr"
+         class="profile-img mb-3"
+         data-bs-toggle="modal"
+         data-bs-target="#profileModal"
+         data-aos="zoom-in"
+         data-aos-delay="200">
+    <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="400">MD TANVIR SARDARR</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="600">
+      Data Science Master's Student | Educator | AI Developer
+    </p>
+  </header>
+
+  <!-- Profile Image Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-body text-center p-0">
+          <img src="pp.jpg" alt="Full Image" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <section class="container py-5" data-aos="fade-up" data-aos-delay="800">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h3 data-aos="fade-right" data-aos-delay="900">About Me</h3>
+        <p data-aos="fade-left" data-aos-delay="1000">
+          Hi! I'm Tanvir, a passionate data science student at the University of Chester, UK. My mission is
+          to make data science education practical, accessible, and project-focused. I believe that the
+          best way to learn is by doing — that’s why I build free tools, ML-powered demos, and end-to-end
+          projects for learners like you.
+        </p>
+
+        <h4 class="mt-4" data-aos="fade-up" data-aos-delay="1100">Mission</h4>
+        <p data-aos="fade-left" data-aos-delay="1200">
+          To teach practical data science through hands-on lessons, live tools, and real projects — all
+          free and open-source.
+        </p>
+
+        <h4 class="mt-4" data-aos="fade-up" data-aos-delay="1300">Tools &amp; Skills</h4>
+        <p data-aos="fade-left" data-aos-delay="1400">
+          Here are the core tools and technologies I use regularly in my data science and AI projects:
+        </p>
+
+        <div class="skills text-center mb-3" data-aos="fade-up" data-aos-delay="1500">
+          <i class="bi bi-terminal-fill" title="Python"></i>
+          <i class="bi bi-bar-chart-fill" title="Pandas"></i>
+          <i class="bi bi-cpu-fill" title="NumPy"></i>
+          <i class="bi bi-graph-up" title="Matplotlib"></i>
+          <i class="bi bi-diagram-3-fill" title="Scikit-learn"></i>
+          <i class="bi bi-cloud-upload-fill" title="Flask / Deployment"></i>
+        </div>
+
+        <ul class="mb-4">
+          <li data-aos="fade-right" data-aos-delay="1600">
+            <strong>Programming:</strong> Python (analysis, ML, automation)
+          </li>
+          <li data-aos="fade-right" data-aos-delay="1700">
+            <strong>Data Analysis:</strong> Pandas &amp; NumPy
+          </li>
+          <li data-aos="fade-right" data-aos-delay="1800">
+            <strong>Visualization:</strong> Matplotlib, Seaborn, Plotly
+          </li>
+          <li data-aos="fade-right" data-aos-delay="1900">
+            <strong>Machine Learning:</strong> Scikit-learn
+          </li>
+          <li data-aos="fade-right" data-aos-delay="2000">
+            <strong>Deep Learning:</strong> TensorFlow &amp; Keras
+          </li>
+          <li data-aos="fade-right" data-aos-delay="2100">
+            <strong>Web Deployment:</strong> Flask
+          </li>
+          <li data-aos="fade-right" data-aos-delay="2200">
+            <strong>Tools:</strong> Jupyter, Colab, Git &amp; GitHub, VS Code
+          </li>
+        </ul>
+
+        <h4 data-aos="fade-up" data-aos-delay="2300">🌍 Connect with Me</h4>
+        <p data-aos="zoom-in" data-aos-delay="2400">
+          <a href="https://github.com/tanvir153"
+             target="_blank"
+             class="btn btn-dark btn-sm me-2">
+            <i class="bi bi-github"></i> GitHub
+          </a>
+          <a href="mailto:tanvir.xf@gmail.com"
+             class="btn btn-danger btn-sm me-2">
+            <i class="bi bi-envelope-fill"></i> Email
+          </a>
+          <a href="https://linkedin.com/in/yourlinkedin"
+             target="_blank"
+             class="btn btn-primary btn-sm">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-dark text-light mt-5"
+          data-aos="fade-up"
+          data-aos-delay="2500">
+    <p>© 2025 Tanvir Sardarr | All rights reserved</p>
+  </footer>
+
+  <!-- Bootstrap & AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+      anchorPlacement: 'top-bottom'
+    });
+  </script>
+</body>
+</html>

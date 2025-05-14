@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Machine Learning | Tanvir Teaches Data Science</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9fb;
+    }
+    .header {
+      background: linear-gradient(to right, #0f2027, #e6219e);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .quiz-box {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Tanvir DS</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+     <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        </ul>
+      </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="header">
+  <h1>Machine Learning</h1>
+  <p class="lead">Build, train, and evaluate ML models using Python and scikit-learn.</p>
+</header>
+
+<!-- Lesson Content -->
+<section class="container py-5">
+
+  <h2>1. What is Machine Learning?</h2>
+  <p>Machine learning is a subset of artificial intelligence that allows systems to learn patterns from data and make predictions or decisions without being explicitly programmed.</p>
+
+  <h2 class="mt-4">2. Supervised Learning: Classification Example</h2>
+  <pre><code>from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Load dataset
+iris = load_iris()
+X_train, X_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, test_size=0.2, random_state=42
+)
+
+# Train model
+clf = RandomForestClassifier()
+clf.fit(X_train, y_train)
+
+# Predict
+y_pred = clf.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))</code></pre>
+
+  <h2 class="mt-5">3. Evaluation Metrics</h2>
+  <ul>
+    <li><strong>Accuracy:</strong> Percentage of correct predictions</li>
+    <li><strong>Precision:</strong> TP / (TP + FP)</li>
+    <li><strong>Recall:</strong> TP / (TP + FN)</li>
+    <li><strong>F1-Score:</strong> Harmonic mean of precision and recall</li>
+  </ul>
+
+  <h2 class="mt-4">4. Practice Notebook</h2>
+  <p>Try training and evaluating models with your own datasets:</p>
+  <a href="https://colab.research.google.com/" target="_blank" class="btn btn-success">Open in Colab</a>
+
+  <div class="quiz-box mt-5">
+    <h4>Quiz: Which of the following is a supervised learning algorithm?</h4>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="quiz1" id="q1a1">
+      <label class="form-check-label" for="q1a1">K-Means Clustering</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="quiz1" id="q1a2">
+      <label class="form-check-label" for="q1a2">PCA (Principal Component Analysis)</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="quiz1" id="q1a3">
+      <label class="form-check-label" for="q1a3">Random Forest </label>
+    </div>
+  </div>
+
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-4 bg-dark text-light mt-5">
+  <p>© 2025 Tanvir Sardarr | <a href="https://github.com/tanvir153" class="text-warning">GitHub</a> | <a href="mailto:tanvir.xf@gmail.com" class="text-warning">Email</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

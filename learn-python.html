@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Python Basics | Tanvir Teaches Data Science</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9fb;
+    }
+    .header {
+      background: linear-gradient(to right, #005c97, #363795);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    #pageNav {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+#pageNav button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      position: relative;
+    }
+    .code-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 0.5em;
+    }
+    .copy-btn, .try-btn {
+      padding: 4px 8px;
+      font-size: 12px;
+      border: 1px solid;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .copy-btn {
+      background: #fff;
+      color: #333;
+      border-color: #ccc;
+    }
+    .try-btn {
+      background: #f0f8ff;
+      color: #0d6efd;
+      border-color: #0d6efd;
+    }
+    .copy-btn:hover { background: #f8f8f8; }
+    .try-btn:hover  { background: #e1efff; }
+    /* Modal overlay */
+    .editor-modal {
+      position: fixed; top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .editor-container {
+      background: #fff;
+      width: 80%; max-width: 800px;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .editor-header {
+      background: #f5f5f5; padding: 8px; text-align: right;
+    }
+    .close-btn {
+      background: none; border: none; font-size: 1.5em; cursor: pointer;
+    }
+    .editor { height: 300px; }
+    .editor-actions {
+      padding: 8px; background: #fafafa; display: flex; gap: 8px;
+    }
+    .run-btn, .check-btn {
+      padding: 6px 12px; border: none; cursor: pointer;
+      font-size: 0.9em; border-radius: 4px;
+    }
+    .run-btn { background: #0d6efd; color: #fff; }
+    .check-btn { background: #198754; color: #fff; }
+    .output {
+      background: #1e1e1e; color: #ddd; padding: 12px;
+      margin: 0; height: 120px; overflow-y: auto;
+      font-family: monospace;
+    }
+    .check-result {
+      padding: 8px; font-weight: bold; text-align: center;
+    }
+    .sidebar {
+      position: sticky; top:20px; background:#fff;
+      padding:15px; border-right:1px solid #ddd;
+      height:calc(100vh - 40px); overflow-y:auto;
+    }
+    .sidebar a { display:block; margin-bottom:10px; color:#333; text-decoration:none; }
+    .sidebar a:hover { text-decoration:underline; }
+    @media (max-width:768px) {
+      .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; }
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#lesson-nav" data-bs-offset="100" tabindex="0">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>🐍 Python Basics</h1>
+    <p class="lead">Learn how to code with Python – the foundation of Data Science!</p>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <nav class="col-md-3 sidebar" id="lesson-nav">
+        <h5 class="fw-bold mb-3">📚 Python Roadmap</h5>
+        <a href="#intro">1. Introduction</a>
+        <a href="#setup">2. Installation</a>
+        <a href="#variables">3. Variables</a>
+        <a href="#input-output">4. I/O</a>
+        <a href="#operators">5. Operators</a>
+        <a href="#conditions">6. Conditionals</a>
+        <a href="#loops">7. Loops</a>
+        <a href="#functions">8. Functions</a>
+        <a href="#lists-tuples">9. Lists & Tuples</a>
+        <a href="#dicts-sets">10. Dicts & Sets</a>
+        <a href="#strings">11. Strings</a>
+        <a href="#list-comp">12. List Comp.</a>
+        <a href="#errors">13. Errors</a>
+        <a href="#file-handling">14. Files</a>
+        <a href="#modules">15. Modules</a>
+        <a href="#libraries">16. Libraries</a>
+        <a href="#oop">17. OOP</a>
+        <a href="#inheritance">18. Inheritance</a>
+        <a href="#lambda">19. Lambda</a>
+        <a href="#generators">20. Generators</a>
+        <a href="#decorators">21. Decorators</a>
+        <a href="#json">22. JSON</a>
+        <a href="#venv">23. venv</a>
+        <a href="#testing">24. Testing</a>
+        <a href="#debugging">25. Debugging</a>
+        <a href="#numpy-pandas">26. NumPy & Pandas</a>
+        <a href="#web-scraping">27. Scraping</a>
+        <a href="#cli">28. CLI</a>
+        <a href="#flask">29. Flask</a>
+        <a href="#projects">30. Projects</a>
+      </nav>
+
+      <!-- Content Column -->
+<div class="col-md-9 py-4 px-4">
+  <!-- Page Navigation -->
+     <div id="pageNav" class="d-flex justify-content-between align-items-center my-3">
+          <button id="prevPageBtn" class="btn btn-outline-primary">Prev Page</button>
+          <span id="pageIndicator">Page 1 / 6</span>
+          <button id="nextPageBtn" class="btn btn-outline-primary">Next Page</button>
+        </div>
+
+
+ <div class="col-md-9 py-4 px-4">
+
+  <!-- 1. Introduction to Python -->
+  <section id="intro" class="mb-5">
+    <h2>1. Introduction to Python</h2>
+    <p>Python is a versatile, high-level, interpreted programming language known for its readability and simplicity. It supports multiple programming paradigms—including procedural, object-oriented, and functional programming—and boasts a vast ecosystem of libraries for web development, data analysis, machine learning, scientific computing, automation, and more.</p>
+    <pre><code>print("Welcome to Python!")</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Welcome to Python!"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 2. Installation & Setup -->
+  <section id="setup" class="mb-5">
+    <h2>2. Installation & Setup</h2>
+    <p>Download Python from <a href="https://python.org">python.org</a> or install via your system package manager. Then choose an editor or IDE (e.g. VS Code, PyCharm), and verify installation:</p>
+    <pre><code># Windows
+python --version
+
+# macOS/Linux
+python3 --version</code></pre>
+    <div class="code-actions">
+      <button class="try-btn" data-expected="" onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 3. Variables & Data Types -->
+  <section id="variables" class="mb-5">
+    <h2>3. Variables & Data Types</h2>
+    <p>Variables in Python are dynamically typed: you assign a value and the interpreter infers its type. Common built-in types include <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>list</code>, <code>dict</code>, and more.</p>
+    <pre><code>name = "Tanvir"
+age = 25
+height = 5.9
+is_student = True
+
+print(name, type(name))
+print(age, type(age))
+print(height, type(height))
+print(is_student, type(is_student))</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Tanvir <class 'str'>
+25 <class 'int'>
+5.9 <class 'float'>
+True <class 'bool'>"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 4. Input / Output -->
+  <section id="input-output" class="mb-5">
+    <h2>4. Input / Output</h2>
+    <p>Use <code>input()</code> to read a string from the user and <code>print()</code> to display output. You can format strings with f-strings or concatenation.</p>
+    <pre><code>user = input("Enter name: ")
+print("Hello, " + user + "!")
+print(f"Welcome, {user}!")</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 5. Operators -->
+  <section id="operators" class="mb-5">
+    <h2>5. Operators</h2>
+    <p>Python supports:</p>
+    <ul>
+      <li><strong>Arithmetic</strong>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>//</code>, <code>**</code></li>
+      <li><strong>Comparison</strong>: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+      <li><strong>Logical</strong>: <code>and</code>, <code>or</code>, <code>not</code></li>
+      <li><strong>Assignment</strong>: <code>=</code>, <code>+=</code>, <code>-=</code>, etc.</li>
+    </ul>
+    <pre><code>x = 10
+y = 3
+
+print(x + y, x * y)      
+print(x / y, x // y)     
+print(x ** y)            </code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="13 30
+3.3333333333333335 3
+1000"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 6. Conditional Statements -->
+  <section id="conditions" class="mb-5">
+    <h2>6. Conditional Statements</h2>
+    <p>Use <code>if</code>, <code>elif</code>, and <code>else</code> to branch your code based on conditions.</p>
+    <pre><code>age = 18
+
+if age &gt;= 18:
+    print("Adult")
+elif age &gt;= 13:
+    print("Teenager")
+else:
+    print("Child")</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Adult"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 7. Loops -->
+  <section id="loops" class="mb-5">
+    <h2>7. Loops</h2>
+    <p><strong>for</strong> loops iterate over sequences or ranges. <strong>while</strong> loops repeat while a condition holds.</p>
+    <pre><code>print("for loop:")
+for i in range(3):
+    print(i)
+
+print("while loop:")
+n = 0
+while n &lt; 3:
+    print(n)
+    n += 1</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="for loop:
+0
+1
+2
+while loop:
+0
+1
+2"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 8. Functions -->
+  <section id="functions" class="mb-5">
+    <h2>8. Functions</h2>
+    <p>Define reusable blocks of code with <code>def</code> and call them by name. You can also return values.</p>
+    <pre><code>def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Tanvir"))</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Hello, Tanvir!"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 9. Lists & Tuples -->
+  <section id="lists-tuples" class="mb-5">
+    <h2>9. Lists & Tuples</h2>
+    <p>Lists are mutable sequences; tuples are immutable. Use square brackets for lists and parentheses for tuples.</p>
+    <pre><code>my_list = [1, 2, 3]
+my_list.append(4)
+
+my_tuple = (4, 5, 6)
+# my_tuple[0] = 7  # Error!
+
+print(my_list, my_tuple)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="[1, 2, 3, 4] (4, 5, 6)"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 10. Dictionaries & Sets -->
+  <section id="dicts-sets" class="mb-5">
+    <h2>10. Dictionaries & Sets</h2>
+    <p>Dictionaries map keys to values. Sets store unique values and support operations like union and intersection.</p>
+    <pre><code>my_dict = {"name": "Tanvir", "age": 25}
+my_set = {1, 2, 2, 3}
+
+print(my_dict["name"])
+print(my_set)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Tanvir
+{1, 2, 3}"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 11. String Manipulation -->
+  <section id="strings" class="mb-5">
+    <h2>11. String Manipulation</h2>
+    <p>Strings are immutable sequences. You can concatenate, slice, and use methods like <code>.upper()</code>, <code>.split()</code>, and <code>.replace()</code>.</p>
+    <pre><code>text = "Data Science"
+print(text.upper())
+print(text.replace("Data","Big Data"))
+print(text.split())</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="DATA SCIENCE
+Big Data Science
+['Data', 'Science']"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 12. List Comprehension -->
+  <section id="list-comp" class="mb-5">
+    <h2>12. List Comprehension</h2>
+    <p>Compact syntax for creating lists: <code>[expr for item in iterable if condition]</code>. It’s often faster and more readable than loops.</p>
+    <pre><code>nums = [1, 2, 3, 4]
+squares = [x**2 for x in nums if x % 2 == 0]
+print(squares)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="[4, 16]"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 13. Error Handling -->
+  <section id="errors" class="mb-5">
+    <h2>13. Error Handling</h2>
+    <p>Use <code>try</code>/<code>except</code> to catch exceptions, <code>else</code> to run when no error, and <code>finally</code> for cleanup.</p>
+    <pre><code>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+else:
+    print("Success")
+finally:
+    print("Done")</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Cannot divide by zero
+Done"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 14. File Handling -->
+  <section id="file-handling" class="mb-5">
+    <h2>14. File Handling</h2>
+    <p>Use <code>with open(...)</code> to read/write files safely without needing to close them explicitly.</p>
+    <pre><code>with open("demo.txt","w") as f:
+    f.write("Hello, File!")
+
+with open("demo.txt","r") as f:
+    print(f.read())</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Hello, File!"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 15. Modules & Packages -->
+  <section id="modules" class="mb-5">
+    <h2>15. Modules & Packages</h2>
+    <p>Organize code into modules (<code>.py</code>) and packages (folders with <code>__init__.py</code>). Import with <code>import</code> or <code>from … import …</code>.</p>
+    <pre><code># math_utils.py
+def add(a, b):
+    return a + b
+
+# main.py
+from math_utils import add
+print(add(3, 4))</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="7"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 16. Standard Libraries -->
+  <section id="libraries" class="mb-5">
+    <h2>16. Standard Libraries</h2>
+    <p>Python’s standard library includes modules for date/time (<code>datetime</code>), randomness (<code>random</code>), OS operations (<code>os</code>), and more.</p>
+    <pre><code>import datetime, random, os
+
+print(datetime.datetime.now())
+print(random.choice([10,20,30]))
+print(os.getcwd())</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 17. OOP Basics -->
+  <section id="oop" class="mb-5">
+    <h2>17. OOP Basics (Classes & Objects)</h2>
+    <p>Define classes to encapsulate data and behavior. Use <code>__init__</code> to initialize attributes and <code>self</code> to reference the instance.</p>
+    <pre><code>class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    def greet(self):
+        return f"Hi, I'm {self.name}"
+
+s = Student("Tanvir", 25)
+print(s.greet())</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Hi, I'm Tanvir"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 18. Inheritance & Polymorphism -->
+  <section id="inheritance" class="mb-5">
+    <h2>18. Inheritance & Polymorphism</h2>
+    <p>Create a subclass that inherits from a parent class and override methods for polymorphic behavior.</p>
+    <pre><code>class Animal:
+    def speak(self):
+        return "..."
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+d = Dog()
+print(d.speak())</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="Woof!"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 19. Lambda, map, filter, reduce -->
+  <section id="lambda" class="mb-5">
+    <h2>19. Lambda, map, filter, reduce</h2>
+    <p>Use <code>lambda</code> for short anonymous functions, <code>map()</code> to apply to each item, <code>filter()</code> to select items, and <code>functools.reduce()</code> to aggregate.</p>
+    <pre><code>from functools import reduce
+
+nums = [1,2,3,4]
+doubled = list(map(lambda x: x*2, nums))
+evens  = list(filter(lambda x: x%2==0, nums))
+sum_all = reduce(lambda a,b: a+b, nums)
+
+print(doubled)
+print(evens)
+print(sum_all)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="[2, 4, 6, 8]
+[2, 4]
+10"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 20. Iterators & Generators -->
+  <section id="generators" class="mb-5">
+    <h2>20. Iterators & Generators</h2>
+    <p>Generators yield values one at a time, saving memory. Use <code>yield</code> in a function to make it a generator.</p>
+    <pre><code>def count_up(n):
+    for i in range(n):
+        yield i
+
+for num in count_up(5):
+    print(num)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected="0
+1
+2
+3
+4"
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 21. Decorators -->
+  <section id="decorators" class="mb-5">
+    <h2>21. Decorators</h2>
+    <p>Decorators wrap a function to extend behavior without modifying its code. Use <code>@decorator</code> syntax above the function definition.</p>
+    <pre><code>def timer(func):
+    import time
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        print("Elapsed:", time.time()-start)
+        return result
+    return wrapper
+
+@timer
+def compute():
+    sum(range(1000000))
+
+compute()</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 22. Working with JSON -->
+  <section id="json" class="mb-5">
+    <h2>22. Working with JSON</h2>
+    <p>Serialize Python objects to JSON with <code>json.dumps()</code> and deserialize with <code>json.loads()</code>.</p>
+    <pre><code>import json
+
+data = {"name": "Tanvir", "age": 25}
+json_str = json.dumps(data)
+loaded   = json.loads(json_str)
+
+print(json_str)
+print(loaded["name"])</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected='{"name": "Tanvir", "age": 25}
+Tanvir'
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 23. Virtual Environments -->
+  <section id="venv" class="mb-5">
+    <h2>23. Virtual Environments</h2>
+    <p>Isolate project dependencies using <code>venv</code>. Create and activate environments to keep requirements separate.</p>
+    <pre><code># Create
+python -m venv env
+
+# Activate (Windows)
+env\Scripts\activate
+
+# Activate (macOS/Linux)
+source env/bin/activate</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 24. Unit Testing with pytest -->
+  <section id="testing" class="mb-5">
+    <h2>24. Unit Testing with pytest</h2>
+    <p>Write tests in files named <code>test_*.py</code> and run <code>pytest</code> to automatically discover and run them.</p>
+    <pre><code># test_math.py
+def add(a, b):
+    return a + b
+
+def test_add():
+    assert add(2, 3) == 5</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 25. Debugging Techniques -->
+  <section id="debugging" class="mb-5">
+    <h2>25. Debugging Techniques</h2>
+    <p>Use <code>pdb</code> or IDE debuggers to set breakpoints and step through code. Simple <code>print()</code> statements can also help trace issues.</p>
+    <pre><code>import pdb
+
+def buggy():
+    a = 1
+    pdb.set_trace()  # Execution will pause here
+    b = 0
+    return a / b
+
+buggy()</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 26. NumPy & Pandas -->
+  <section id="numpy-pandas" class="mb-5">
+    <h2>26. Introduction to NumPy & Pandas</h2>
+    <p>NumPy provides fast N-dimensional arrays; Pandas builds on it to offer DataFrame and Series for tabular data analysis.</p>
+    <pre><code>import numpy as np
+import pandas as pd
+
+arr = np.arange(10).reshape(2,5)
+df  = pd.DataFrame(arr, columns=list("ABCDE"))
+print(df)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 27. Web Scraping with requests & BeautifulSoup -->
+  <section id="web-scraping" class="mb-5">
+    <h2>27. Web Scraping</h2>
+    <p>Use <code>requests</code> to fetch pages and <code>BeautifulSoup</code> to parse HTML and extract data.</p>
+    <pre><code>import requests
+from bs4 import BeautifulSoup
+
+resp = requests.get("https://example.com")
+soup = BeautifulSoup(resp.text, "html.parser")
+print(soup.title.string)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 28. CLI Tools using argparse -->
+  <section id="cli" class="mb-5">
+    <h2>28. CLI with argparse</h2>
+    <p>Build command-line interfaces with <code>argparse</code>, automatically generating help messages.</p>
+    <pre><code>import argparse
+
+parser = argparse.ArgumentParser(description="Greet user")
+parser.add_argument("--name", required=True, help="Your name")
+args = parser.parse_args()
+
+print(f"Hello, {args.name}!")</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 29. Basics of Flask -->
+  <section id="flask" class="mb-5">
+    <h2>29. Flask Basics</h2>
+    <p>Flask is a micro web framework. Define routes with <code>@app.route</code> and return responses or templates.</p>
+    <pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello, Flask!"
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+  <!-- 30. Final Mini Projects -->
+  <section id="projects" class="mb-5">
+    <h2>30. Final Mini Projects</h2>
+    <p>Combine your knowledge to build end-to-end projects:</p>
+    <ul>
+      <li><strong>CSV Analyzer:</strong> Read CSV files with Pandas and compute summary statistics.</li>
+      <li><strong>Web Scraper CLI:</strong> Fetch multiple pages and save extracted data.</li>
+      <li><strong>Flask Dashboard:</strong> Deploy a small web app visualizing data with Plotly or Matplotlib.</li>
+    </ul>
+    <pre><code># Project structure outline
+# ├── analyze.py
+# ├── scraper.py
+# └── app.py</code></pre>
+    <div class="code-actions">
+      <button class="try-btn"
+              data-expected=""
+              onclick="openEditorModal(this)">Try It</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </div>
+  </section>
+
+</div>
+
+</div>
+
+  <!-- IDE Modal -->
+  <div id="editorModal" class="editor-modal">
+    <div class="editor-container">
+      <div class="editor-header">
+        <button onclick="closeEditor()" class="close-btn">&times;</button>
+      </div>
+      <div id="editor" class="editor"></div>
+      <div class="editor-actions">
+        <button onclick="runCode()" class="run-btn">Run ▶️</button>
+        <button onclick="checkCode()" class="check-btn">Check ✅</button>
+      </div>
+      <pre id="output" class="output"></pre>
+      <div id="checkResult" class="check-result"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.11.2/ace.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+  <script>
+    // Copy code to clipboard
+    function copyCode(btn) {
+      const codeEl = btn.closest('section').querySelector('pre code');
+      navigator.clipboard.writeText(codeEl.innerText.trim());
+      btn.innerText = "Copied!";
+      setTimeout(() => btn.innerText = "Copy", 1500);
+    }
+
+    // IDE modal logic
+    let editor, expectedOutput;
+    function openEditorModal(btn) {
+      const sec = btn.closest('section');
+      const code = sec.querySelector('pre code').innerText.trim();
+      expectedOutput = btn.getAttribute('data-expected') || "";
+      document.getElementById('editorModal').style.display = 'flex';
+      if (!editor) {
+        editor = ace.edit("editor");
+        editor.setTheme("ace/theme/github");
+        editor.session.setMode("ace/mode/python");
+      }
+      editor.setValue(code, -1);
+      document.getElementById('output').innerText = "";
+      document.getElementById('checkResult').innerText = "";
+    }
+    function closeEditor() {
+      document.getElementById('editorModal').style.display = 'none';
+    }
+    function runCode() {
+      const outf = text => document.getElementById('output').innerText += text;
+      const builtinRead = file => {
+        if (!Sk.builtinFiles?.files[file]) throw `File not found: ${file}`;
+        return Sk.builtinFiles.files[file];
+      };
+      document.getElementById('output').innerText = "";
+      Sk.configure({ output: outf, read: builtinRead });
+      Sk.pre = "output";
+      Sk.misceval.asyncToPromise(() =>
+        Sk.importMainWithBody("<stdin>", false, editor.getValue())
+      ).catch(err => outf(err.toString()));
+    }
+    function checkCode() {
+      const actual = document.getElementById('output').innerText.trim();
+      const resultEl = document.getElementById('checkResult');
+      if (expectedOutput && actual === expectedOutput) {
+        resultEl.style.color = '#198754';
+        resultEl.innerText = "✅ Correct!";
+      } else {
+        resultEl.style.color = '#dc3545';
+        resultEl.innerText = `❌ Got "${actual}", expected "${expectedOutput}"`;
+      }
+    }
+  </script>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const sections = Array.from(document.querySelectorAll('section'));
+  const perPage  = 5;
+  const totalPages = Math.ceil(sections.length / perPage);
+  let currentPage = 1;
+
+  const prevBtn    = document.getElementById('prevPageBtn');
+  const nextBtn    = document.getElementById('nextPageBtn');
+  const indicator  = document.getElementById('pageIndicator');
+  const navLinks   = Array.from(document.querySelectorAll('#lesson-nav a'));
+
+  function renderPage() {
+    sections.forEach((sec, i) => {
+      const pageIndex = Math.floor(i / perPage) + 1;
+      sec.style.display = (pageIndex === currentPage) ? '' : 'none';
+    });
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+    indicator.textContent = `Page ${currentPage} / ${totalPages}`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage();
+    }
+  });
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderPage();
+    }
+  });
+
+  // clicking a sidebar link jumps to that section (and its page)
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const idx = sections.findIndex(s => s.id === targetId);
+      if (idx > -1) {
+        currentPage = Math.floor(idx / perPage) + 1;
+        renderPage();
+        document.getElementById(targetId)
+                .scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // highlight the link whose section is in view
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id   = entry.target.id;
+      const link = document.querySelector(`#lesson-nav a[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link && link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.6 });
+
+  sections.forEach(sec => observer.observe(sec));
+
+  // init
+  renderPage();
+});
+</script>
+
+</body>
+</html>
