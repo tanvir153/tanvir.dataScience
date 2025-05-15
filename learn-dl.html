@@ -3,109 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Deep Learning Module | Tanvir Teaches Data Science</title>
+  <title>Deep Learning Module </title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f9f9fb;
-    }
-    .header {
-      background: linear-gradient(to right, #005c97, #363795);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    #pageNav {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 1rem;
-    }
-    #pageNav button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    pre {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      position: relative;
-    }
-    .code-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 0.5em;
-    }
-    .copy-btn, .try-btn {
-      padding: 4px 8px;
-      font-size: 12px;
-      border: 1px solid;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .copy-btn {
-      background: #fff;
-      color: #333;
-      border-color: #ccc;
-    }
-    .try-btn {
-      background: #f0f8ff;
-      color: #0d6efd;
-      border-color: #0d6efd;
-    }
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9fb; }
+    .header { background: linear-gradient(to right, #f90303, #363795); color: white; padding: 30px; text-align: center; }
+    #pageNav { border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+    #pageNav button:disabled { opacity: 0.5; cursor: not-allowed; }
+    pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    .code-actions { display: flex; gap: 8px; margin-top: 0.5em; }
+    .copy-btn, .try-btn { padding: 4px 8px; font-size: 12px; border: 1px solid; border-radius: 3px; cursor: pointer; }
+    .copy-btn { background: #fff; color: #333; border-color: #ccc; }
+    .try-btn { background: #f0f8ff; color: #0d6efd; border-color: #0d6efd; }
     .copy-btn:hover { background: #f8f8f8; }
     .try-btn:hover  { background: #e1efff; }
-    .editor-modal {
-      position: fixed; top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    .editor-container {
-      background: #fff;
-      width: 80%; max-width: 800px;
-      border-radius: 6px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .editor-header {
-      background: #f5f5f5; padding: 8px; text-align: right;
-    }
-    .close-btn {
-      background: none; border: none; font-size: 1.5em; cursor: pointer;
-    }
+    .editor-modal { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    .editor-container { background: #fff; width: 80%; max-width: 800px; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+    .editor-header { background: #f5f5f5; padding: 8px; text-align: right; }
+    .close-btn { background: none; border: none; font-size: 1.5em; cursor: pointer; }
     .editor { height: 300px; }
-    .editor-actions {
-      padding: 8px; background: #fafafa; display: flex; gap: 8px;
-    }
-    .run-btn, .check-btn {
-      padding: 6px 12px; border: none; cursor: pointer;
-      font-size: 0.9em; border-radius: 4px;
-    }
+    .editor-actions { padding: 8px; background: #fafafa; display: flex; gap: 8px; }
+    .run-btn, .check-btn { padding: 6px 12px; border: none; cursor: pointer; font-size: 0.9em; border-radius: 4px; }
     .run-btn { background: #0d6efd; color: #fff; }
     .check-btn { background: #198754; color: #fff; }
-    .output {
-      background: #1e1e1e; color: #ddd; padding: 12px;
-      margin: 0; height: 120px; overflow-y: auto;
-      font-family: monospace;
-    }
-    .check-result {
-      padding: 8px; font-weight: bold; text-align: center;
-    }
-    .sidebar {
-      position: sticky; top:20px; background:#fff;
-      padding:15px; border-right:1px solid #ddd;
-      height:calc(100vh - 40px); overflow-y:auto;
-    }
+    .output { background: #1e1e1e; color: #ddd; padding: 12px; margin: 0; height: 120px; overflow-y: auto; font-family: monospace; }
+    .check-result { padding: 8px; font-weight: bold; text-align: center; }
+    .sidebar { position: sticky; top:20px; background:#fff; padding:15px; border-right:1px solid #ddd; height:calc(100vh - 40px); overflow-y:auto; }
     .sidebar a { display:block; margin-bottom:10px; color:#333; text-decoration:none; }
-    .sidebar a:hover { text-decoration:underline; }
-    @media (max-width:768px) {
-      .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; }
+    .sidebar a:hover, .sidebar a.active { text-decoration:underline; font-weight:bold; }
+    /* Sub-menu pills styling */
+    .nav-pills .nav-link {
+      color: hsl(264, 15%, 94%);
+      background: rgb(128, 128, 234);
+      margin: 0 4px;
+      transition: background .2s;
     }
+    .nav-pills .nav-link:hover {
+      background: rgb(54, 3, 241);
+      color: #e1efff;
+    }
+    .nav-pills .nav-link.active {
+      background: #f50303;
+    }
+    @media (max-width:768px) { .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; } }
   </style>
 </head>
 <body tabindex="0">
@@ -121,11 +62,9 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link active" href="learn-dl.html">Deep Learning</a></li>
           <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-
         </ul>
       </div>
     </div>
@@ -134,20 +73,42 @@
   <!-- Header -->
   <header class="header">
     <h1>🤖 Deep Learning Module</h1>
-    <p class="lead">From perceptrons to CNNs, hands-on in-browser code demos.</p>
+    <p class="lead">From perceptrons to CNNs: hands-on in-browser demos</p>
   </header>
+
+  <!-- Sub-menu: Course Navigation -->
+  <nav class="container py-2">
+    <ul class="nav nav-pills justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="learn-python.html">🐍 Python Basics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-numpy.html">🔢 NumPy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-ml.html">🤖 Machine Learning</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="learn-dl.html">📚 Deep Learning</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-viz.html">📊 Data Visualization</a>
+      </li>
+    </ul>
+  </nav>
+
 
   <div class="container-fluid">
     <div class="row">
 
       <!-- Sidebar -->
       <nav class="col-md-3 sidebar" id="lesson-nav">
-        <h5 class="fw-bold mb-3">🧠 DL Roadmap</h5>
+        <h5 class="fw-bold mb-3">DL Roadmap</h5>
         <a href="#intro">1. Introduction</a>
         <a href="#perceptron">2. Perceptron</a>
         <a href="#activations">3. Activations</a>
-        <a href="#forward">4. Forward Prop.</a>
-        <a href="#backprop">5. Backprop.</a>
+        <a href="#forward">4. Forward Propagation</a>
+        <a href="#backprop">5. Backpropagation</a>
         <a href="#loss-opt">6. Loss &amp; Optimizers</a>
         <a href="#layers">7. Layers API</a>
         <a href="#keras-basics">8. Keras Basics</a>
@@ -166,8 +127,6 @@
       </nav>
 
       <!-- Content -->
-
-      <!-- Content -->
       <div class="col-md-9 py-4 px-4">
 
         <!-- Pager -->
@@ -177,25 +136,29 @@
           <button id="nextPageBtn" class="btn btn-outline-primary">Next Page</button>
         </div>
 
-        <!-- Sections -->
-        <!-- Page 1 -->
+        <!-- 1. Introduction -->
         <section id="intro" class="mb-5">
           <h2>1. Introduction</h2>
-          <p>Deep Learning is a subset of machine learning that builds and trains artificial
-          neural networks with many layers to model complex, hierarchical patterns in data.
-          Unlike traditional algorithms, deep networks automatically learn feature representations.</p>
+          <p>
+            Deep Learning is a subset of machine learning that builds and trains multi-layer
+            neural networks. By stacking many layers of non-linear transformations, deep nets
+            learn hierarchical feature representations automatically, making them extremely
+            powerful for tasks like vision, language, and time-series.
+          </p>
         </section>
 
+        <!-- 2. Perceptron -->
         <section id="perceptron" class="mb-5">
           <h2>2. Perceptron</h2>
-          <p>The perceptron is the simplest neural unit, acting as a linear binary classifier.
-          It computes a weighted sum of inputs, applies a step activation, and outputs 0 or 1.</p>
+          <p>
+            The perceptron is the simplest neural unit: a linear classifier with step activation.
+            It computes <em>z = w·x + b</em> and outputs 1 if z>0 else 0.
+          </p>
           <pre><code>def perceptron(x, w, b=0):
     z = sum(xi*wi for xi,wi in zip(x,w)) + b
     return 1 if z > 0 else 0
 
-# Example
-print(perceptron([1,0,1],[0.5,0.2,-0.3], b=0.1))  # Output: 1
+print(perceptron([1,0,1], [0.5,0.2,-0.3], b=0.1))  # 1
 </code></pre>
           <div class="code-actions">
             <button class="try-btn" data-expected="1" onclick="openEditorModal(this)">Try It</button>
@@ -203,20 +166,23 @@ print(perceptron([1,0,1],[0.5,0.2,-0.3], b=0.1))  # Output: 1
           </div>
         </section>
 
+        <!-- 3. Activations -->
         <section id="activations" class="mb-5">
           <h2>3. Activations</h2>
-          <p>Activation functions introduce non-linearity. Common choices:</p>
-          <ul>
-            <li><strong>Sigmoid:</strong> <code>1/(1+e^-x)</code> — outputs (0,1)</li>
-            <li><strong>ReLU:</strong> <code>max(0,x)</code> — simple and effective</li>
-            <li><strong>Tanh:</strong> <code>(e^x - e^-x)/(e^x + e^-x)</code> — outputs (-1,1)</li>
-          </ul>
+          <p>
+            Activation functions inject non-linearity. Key examples:
+            <ul>
+              <li><strong>Sigmoid</strong>: 1/(1+e<sup>-x</sup>) → (0,1)</li>
+              <li><strong>ReLU</strong>: max(0,x) → efficient sparse activations</li>
+              <li><strong>Tanh</strong>: (e<sup>x</sup>-e<sup>-x</sup>)/(e<sup>x</sup>+e<sup>-x</sup>) → (-1,1)</li>
+            </ul>
+          </p>
           <pre><code>import math
 
 def sigmoid(x):
-    return 1 / (1 + math.exp(-x))
+    return 1/(1+math.exp(-x))
 
-print(sigmoid(2))  # 0.8808
+print(sigmoid(2))  # 0.880797...
 </code></pre>
           <div class="code-actions">
             <button class="try-btn" data-expected="0.8807970779778823" onclick="openEditorModal(this)">Try It</button>
@@ -224,16 +190,16 @@ print(sigmoid(2))  # 0.8808
           </div>
         </section>
 
+        <!-- 4. Forward Propagation -->
         <section id="forward" class="mb-5">
           <h2>4. Forward Propagation</h2>
-          <p>Computes layer outputs given inputs, weights, biases, and activation.</p>
+          <p>Compute layer outputs: z = Wx + b, then apply activation.</p>
           <pre><code>def forward(x, W, b, act):
-    # x: input vector, W: list of weight rows, b: bias vector
-    z = [sum(xi * w for xi, w in zip(x, row)) + bi for row, bi in zip(W, b)]
+    z = [sum(xi*w for xi,w in zip(x,row)) + bi for row,bi in zip(W,b)]
     return [act(zi) for zi in z]
 
-# Example with one neuron
-print(forward([1,2], [[0.5, -0.6]], [0.1], sigmoid))
+# example
+print(forward([1,2],[ [0.5,0.5] ], [0], math.tanh))
 </code></pre>
           <div class="code-actions">
             <button class="try-btn" onclick="openEditorModal(this)">Try It</button>
@@ -241,41 +207,39 @@ print(forward([1,2], [[0.5, -0.6]], [0.1], sigmoid))
           </div>
         </section>
 
+        <!-- 5. Backpropagation -->
         <section id="backprop" class="mb-5">
           <h2>5. Backpropagation</h2>
-          <p>Backpropagation uses the chain rule to compute gradients of the loss w.r.t.
-          each weight. These gradients guide weight updates via an optimizer.</p>
-          <p><em>See accompanying math notes for derivation!</em></p>
+          <p>
+            Backprop computes gradients via the chain rule, propagating errors layer
+            by layer. These gradients update weights during training.
+          </p>
         </section>
 
-        <!-- Page 2 -->
+        <!-- 6. Loss & Optimizers -->
         <section id="loss-opt" class="mb-5">
           <h2>6. Loss &amp; Optimizers</h2>
-          <p><strong>Loss functions</strong> measure prediction error. Examples:
-          MSE for regression, cross-entropy for classification.</p>
+          <p>Loss measures prediction error: MSE for regression, cross-entropy for classification.</p>
           <pre><code>import numpy as np
 
 def mse(y, y_pred):
-    return np.mean((y - y_pred) ** 2)
+    return np.mean((y - y_pred)**2)
 
 print(mse(np.array([1,2]), np.array([1.1,1.9])))  # 0.005
 </code></pre>
-          <p><strong>Optimizers</strong> like SGD, Adam, RMSprop adjust weights using gradients.
-          They include learning rate schedules and momentum.</p>
           <div class="code-actions">
             <button class="try-btn" data-expected="0.005" onclick="openEditorModal(this)">Try It</button>
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
           </div>
         </section>
 
+        <!-- 7. Layers API -->
         <section id="layers" class="mb-5">
           <h2>7. Layers API</h2>
-          <p>Keras layers encapsulate weights, biases, and activations.</p>
+          <p>Keras layers encapsulate weights, biases, activations.</p>
           <pre><code>from tensorflow.keras import layers
 
-# Dense layer with 10 units and ReLU activation
-dense = layers.Dense(10, activation='relu')
-print(dense)
+layers.Dense(10, activation='relu')
 </code></pre>
           <div class="code-actions">
             <button class="try-btn" onclick="openEditorModal(this)">Try It</button>
@@ -283,14 +247,14 @@ print(dense)
           </div>
         </section>
 
+        <!-- 8. Keras Basics -->
         <section id="keras-basics" class="mb-5">
           <h2>8. Keras Basics</h2>
-          <p>Keras Sequential API stacks layers in order.</p>
           <pre><code>from tensorflow import keras
 
 model = keras.Sequential([
-    layers.Dense(64, activation='relu', input_shape=(784,)),
-    layers.Dense(10, activation='softmax')
+  layers.Dense(64, activation='relu', input_shape=(784,)),
+  layers.Dense(10, activation='softmax')
 ])
 print(model.summary())
 </code></pre>
@@ -300,13 +264,13 @@ print(model.summary())
           </div>
         </section>
 
+        <!-- 9. Compile -->
         <section id="compile" class="mb-5">
           <h2>9. Compile</h2>
-          <p>Configure loss, optimizer, and metrics before training.</p>
           <pre><code>model.compile(
-    optimizer='adam',
-    loss='sparse_categorical_crossentropy',
-    metrics=['accuracy']
+  optimizer='adam',
+  loss='sparse_categorical_crossentropy',
+  metrics=['accuracy']
 )
 </code></pre>
           <div class="code-actions">
@@ -315,14 +279,14 @@ print(model.summary())
           </div>
         </section>
 
+        <!-- 10. Training -->
         <section id="training" class="mb-5">
           <h2>10. Training</h2>
-          <p>Fit the model on data for a number of epochs.</p>
           <pre><code>history = model.fit(
-    X_train, y_train,
-    epochs=5,
-    batch_size=32,
-    validation_split=0.2
+  X_train, y_train,
+  epochs=5,
+  batch_size=32,
+  validation_split=0.2
 )
 </code></pre>
           <div class="code-actions">
@@ -331,12 +295,11 @@ print(model.summary())
           </div>
         </section>
 
-        <!-- Page 3 -->
+        <!-- 11. Evaluation -->
         <section id="evaluation" class="mb-5">
           <h2>11. Evaluation</h2>
-          <p>Assess model performance on test data.</p>
           <pre><code>loss, acc = model.evaluate(X_test, y_test)
-print(f"Test loss: {loss}, Test accuracy: {acc}")
+print(f"Test loss: {loss}, accuracy: {acc}")
 </code></pre>
           <div class="code-actions">
             <button class="try-btn" onclick="openEditorModal(this)">Try It</button>
@@ -344,16 +307,17 @@ print(f"Test loss: {loss}, Test accuracy: {acc}")
           </div>
         </section>
 
+        <!-- 12. CNNs -->
         <section id="cnn" class="mb-5">
           <h2>12. CNNs</h2>
-          <p>Convolutional Neural Networks for image data: conv + pooling layers.
-          Example: build a simple CNN for MNIST.</p>
-          <pre><code>model = keras.Sequential([
-    layers.Reshape((28,28,1), input_shape=(784,)),
-    layers.Conv2D(32, (3,3), activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Flatten(),
-    layers.Dense(10, activation='softmax')
+          <pre><code>from tensorflow.keras import layers
+
+model = keras.Sequential([
+  layers.Reshape((28,28,1), input_shape=(784,)),
+  layers.Conv2D(32, (3,3), activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Flatten(),
+  layers.Dense(10, activation='softmax')
 ])
 print(model.summary())
 </code></pre>
@@ -363,13 +327,13 @@ print(model.summary())
           </div>
         </section>
 
+        <!-- 13. RNNs -->
         <section id="rnn" class="mb-5">
           <h2>13. RNNs</h2>
-          <p>Recurrent Neural Networks for sequence data. Example: SimpleRNN.</p>
           <pre><code>model = keras.Sequential([
-    layers.SimpleRNN(64, return_sequences=True, input_shape=(None, 10)),
-    layers.SimpleRNN(32),
-    layers.Dense(1)
+  layers.SimpleRNN(64, return_sequences=True, input_shape=(None, 10)),
+  layers.SimpleRNN(32),
+  layers.Dense(1)
 ])
 print(model.summary())
 </code></pre>
@@ -379,16 +343,15 @@ print(model.summary())
           </div>
         </section>
 
+        <!-- 14. Transfer Learning -->
         <section id="transfer" class="mb-5">
           <h2>14. Transfer Learning</h2>
-          <p>Use pre-trained models as a backbone for new tasks.
-          Example: VGG16 feature extractor.</p>
           <pre><code>from tensorflow.keras.applications import VGG16
 
 base = VGG16(
-    include_top=False,
-    input_shape=(224,224,3),
-    weights='imagenet'
+  include_top=False,
+  input_shape=(224,224,3),
+  weights='imagenet'
 )
 base.trainable = False
 </code></pre>
@@ -398,49 +361,48 @@ base.trainable = False
           </div>
         </section>
 
-        <!-- Page 4 -->
+        <!-- 15. TensorBoard -->
         <section id="tensorboard" class="mb-5">
           <h2>15. TensorBoard</h2>
-          <p>Visualize metrics and graphs during training.</p>
           <pre><code>tensorboard --logdir=./logs</code></pre>
         </section>
 
+        <!-- 16. Callbacks -->
         <section id="callbacks" class="mb-5">
           <h2>16. Callbacks</h2>
-          <p>Callbacks let you customize training: checkpoints, early stopping.</p>
           <pre><code>from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 callbacks = [
-    EarlyStopping(patience=3, restore_best_weights=True),
-    ModelCheckpoint('best.h5', save_best_only=True)
+  EarlyStopping(patience=3, restore_best_weights=True),
+  ModelCheckpoint('best.h5', save_best_only=True)
 ]
 </code></pre>
         </section>
 
+        <!-- 17. Data Augmentation -->
         <section id="data-aug" class="mb-5">
           <h2>17. Data Augmentation</h2>
-          <p>Generate more training data via transformations.</p>
           <pre><code>from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 datagen = ImageDataGenerator(
-    rotation_range=20,
-    width_shift_range=0.2,
-    height_shift_range=0.2,
-    horizontal_flip=True
+  rotation_range=20,
+  width_shift_range=0.2,
+  height_shift_range=0.2,
+  horizontal_flip=True
 )
 </code></pre>
         </section>
 
+        <!-- 18. Hyperparam Tuning -->
         <section id="hyperparam" class="mb-5">
           <h2>18. Hyperparameter Tuning</h2>
-          <p>Use KerasTuner for automated search.</p>
           <pre><code>import kerastuner as kt
 
 def build_model(hp):
     model = keras.Sequential()
     for i in range(hp.Int('layers', 1, 3)):
         model.add(layers.Dense(
-            units=hp.Int('units_' + str(i), 32, 128, step=32),
+            units=hp.Int(f'units_{i}', 32, 128, step=32),
             activation='relu'
         ))
     model.add(layers.Dense(10, activation='softmax'))
@@ -451,7 +413,7 @@ def build_model(hp):
     )
     return model
 
- tuner = kt.RandomSearch(
+tuner = kt.RandomSearch(
     build_model,
     objective='val_accuracy',
     max_trials=5
@@ -459,20 +421,21 @@ def build_model(hp):
 </code></pre>
         </section>
 
+        <!-- 19. Saving Models -->
         <section id="saving" class="mb-5">
           <h2>19. Saving Models</h2>
           <pre><code>model.save('my_model.h5')
-# Reload
 new_model = keras.models.load_model('my_model.h5')
 </code></pre>
         </section>
 
+        <!-- 20. Mini-Projects -->
         <section id="projects" class="mb-5">
           <h2>20. Mini-Projects</h2>
           <ul>
-            <li><strong>MNIST Classifier:</strong> Build and train a CNN to recognize handwritten digits.</li>
-            <li><strong>Cat vs Dog CNN:</strong> Fine-tune a pre-trained ResNet50 on pet images.</li>
-            <li><strong>Sentiment RNN:</strong> Train an RNN on movie reviews for sentiment analysis.</li>
+            <li><strong>MNIST Classifier</strong>: Build and train a CNN to recognize digits.</li>
+            <li><strong>Cat vs Dog</strong>: Fine-tune a pre-trained model on pet images.</li>
+            <li><strong>Sentiment RNN</strong>: Train an RNN on movie reviews for sentiment analysis.</li>
           </ul>
         </section>
 
@@ -480,8 +443,7 @@ new_model = keras.models.load_model('my_model.h5')
     </div>
   </div>
 
-
-  <!-- IDE Modal -->
+  <!-- Editor Modal -->
   <div id="editorModal" class="editor-modal">
     <div class="editor-container">
       <div class="editor-header">
@@ -499,28 +461,64 @@ new_model = keras.models.load_model('my_model.h5')
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.11.2/ace.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
   <script>
-    // Clipboard
+    AOS.init({ duration:700, once:true, anchorPlacement:'top-bottom' });
+
+    // Pagination & Sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const secs = Array.from(document.querySelectorAll('section'));
+      const perPage = 5, total = secs.length, totalPages = Math.ceil(total/perPage);
+      let current = 1;
+      const prev = document.getElementById('prevPageBtn'),
+            next = document.getElementById('nextPageBtn'),
+            ind  = document.getElementById('pageIndicator'),
+            links= Array.from(document.querySelectorAll('#lesson-nav a'));
+
+      function render() {
+        secs.forEach((s,i) => s.style.display = Math.floor(i/perPage)+1===current?'block':'none');
+        prev.disabled = current===1;
+        next.disabled = current===totalPages;
+        ind.textContent = `Page ${current} / ${totalPages}`;
+      }
+      prev.onclick = ()=> { if(current>1) current--,render(); };
+      next.onclick = ()=> { if(current<totalPages) current++,render(); };
+      links.forEach(l=>l.addEventListener('click',e=>{
+        e.preventDefault();
+        const id = l.getAttribute('href').slice(1),
+              idx= secs.findIndex(s=>s.id===id);
+        if(idx>-1){
+          current = Math.floor(idx/perPage)+1;
+          render();
+          document.getElementById(id).scrollIntoView({behavior:'smooth'});
+        }
+      }));
+      render();
+    });
+
+    // Copy-to-Clipboard
     function copyCode(btn) {
-      const code = btn.closest('section').querySelector('pre code').innerText;
-      navigator.clipboard.writeText(code);
-      btn.innerText = 'Copied!';
-      setTimeout(()=>btn.innerText='Copy',1500);
+      const txt = btn.closest('section').querySelector('pre code').innerText;
+      navigator.clipboard.writeText(txt).then(()=>{
+        btn.textContent='Copied!';
+        setTimeout(()=>btn.textContent='Copy',1500);
+      });
     }
-    // Editor modal
-    let editor, expectedOutput;
+
+    // Try-It Modal
+    let editor, expected;
     function openEditorModal(btn) {
       const sec = btn.closest('section');
       const code = sec.querySelector('pre code').innerText.trim();
-      expectedOutput = btn.getAttribute('data-expected')||'';
+      expected = btn.dataset.expected || '';
       document.getElementById('editorModal').style.display='flex';
-      if (!editor) {
-        editor = ace.edit("editor");
-        editor.setTheme("ace/theme/github");
-        editor.session.setMode("ace/mode/python");
+      if(!editor){
+        editor = ace.edit('editor');
+        editor.setTheme('ace/theme/github');
+        editor.session.setMode('ace/mode/python');
       }
       editor.setValue(code, -1);
       document.getElementById('output').innerText='';
@@ -530,75 +528,33 @@ new_model = keras.models.load_model('my_model.h5')
       document.getElementById('editorModal').style.display='none';
     }
     function runCode() {
-      const outf = text=>document.getElementById('output').innerText+=text;
-      const builtinRead = f=>{
-        if (!Sk.builtinFiles?.files[f]) throw `File not found: ${f}`;
+      const outf = txt=>document.getElementById('output').innerText+=txt;
+      const readf = f=>{
+        if(!Sk.builtinFiles?.files[f]) throw `File not found: ${f}`;
         return Sk.builtinFiles.files[f];
       };
       document.getElementById('output').innerText='';
-      Sk.configure({output: outf, read: builtinRead});
-      Sk.pre="output";
-      Sk.misceval.asyncToPromise(()=>Sk.importMainWithBody("<stdin>",false,editor.getValue()))
-        .catch(e=>outf(e.toString()));
+      Sk.configure({output:outf,read:readf});
+      Sk.pre='output';
+      Sk.misceval.asyncToPromise(()=>Sk.importMainWithBody('<stdin>',false,editor.getValue()))
+        .catch(err=>outf(err.toString()));
     }
     function checkCode() {
       const actual = document.getElementById('output').innerText.trim();
       const res = document.getElementById('checkResult');
-      if (expectedOutput && actual===expectedOutput) {
-        res.style.color='#198754'; res.innerText='✅ Correct!';
+      if(expected && actual===expected){
+        res.style.color='#198754'; res.textContent='✅ Correct!';
       } else {
         res.style.color='#dc3545';
-        res.innerText=`❌ Got "${actual}", expected "${expectedOutput}"`;
+        res.textContent=`❌ Got "${actual}", expected "${expected}"`;
       }
     }
-    // Pagination & sidebar scrollspy
-    document.addEventListener('DOMContentLoaded',()=>{
-      const secs=Array.from(document.querySelectorAll('section'));
-      const perPage=5, totalPages=Math.ceil(secs.length/perPage);
-      let currentPage=1;
-      const prevBtn=document.getElementById('prevPageBtn'),
-            nextBtn=document.getElementById('nextPageBtn'),
-            indicator=document.getElementById('pageIndicator'),
-            links=Array.from(document.querySelectorAll('#lesson-nav a'));
-
-      function render() {
-        secs.forEach((s,i)=> {
-          s.style.display=(Math.floor(i/perPage)+1===currentPage)?'':'none';
-        });
-        prevBtn.disabled=currentPage===1;
-        nextBtn.disabled=currentPage===totalPages;
-        indicator.textContent=`Page ${currentPage} / ${totalPages}`;
-        document.querySelector('.col-md-9').scrollIntoView({behavior:'smooth'});
-      }
-      prevBtn.addEventListener('click',()=>{ if(currentPage>1){currentPage--;render();}});
-      nextBtn.addEventListener('click',()=>{ if(currentPage<totalPages){currentPage++;render();}});
-      links.forEach(link=>{
-        link.addEventListener('click',e=>{
-          e.preventDefault();
-          const id=link.getAttribute('href').slice(1);
-          const idx=secs.findIndex(s=>s.id===id);
-          if(idx>-1){
-            currentPage=Math.floor(idx/perPage)+1;
-            render();
-            document.getElementById(id).scrollIntoView({behavior:'smooth'});
-          }
-        });
-      });
-
-      const obs=new IntersectionObserver(entries=>{
-        entries.forEach(ent=>{
-          if(ent.isIntersecting){
-            const id=ent.target.id;
-            links.forEach(l=>l.classList.remove('active'));
-            const a=document.querySelector(`#lesson-nav a[href="#${id}"]`);
-            a?.classList.add('active');
-          }
-        });
-      },{threshold:0.6});
-      secs.forEach(s=>obs.observe(s));
-
-      render();
-    });
   </script>
+  <!-- Bootstrap & AOS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<script>AOS.init();</script>
+
 </body>
 </html>
