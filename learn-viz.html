@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Visualization Module | Tanvir Teaches Data Science</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9fb; }
+    .header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(to right, #025013, #f200c2);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+  will-change: opacity;
+}
+
+    #pageNav { border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+    #pageNav button:disabled { opacity: 0.5; cursor: not-allowed; }
+    pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    .code-actions { display: flex; gap: 8px; margin-top: 0.5em; }
+    .copy-btn, .try-btn { padding: 4px 8px; font-size: 12px; border: 1px solid; border-radius: 3px; cursor: pointer; }
+    .copy-btn { background: #fff; color: #333; border-color: #ccc; }
+    .try-btn { background: #f0f8ff; color: #0d6efd; border-color: #0d6efd; }
+    .copy-btn:hover { background: #f8f8f8; }
+    .try-btn:hover  { background: #e1efff; }
+    .sidebar { position: sticky; top:20px; background:#fff; padding:15px; border-right:1px solid #ddd; height:calc(100vh - 40px); overflow-y:auto; }
+    .sidebar a { display:block; margin-bottom:10px; color:#333; text-decoration:none; }
+    .sidebar a:hover, .sidebar a.active { text-decoration:underline; font-weight:bold; }
+    .nav-pills .nav-link {
+      color: #fff; background: rgb(128, 128, 234); margin: 0 4px; transition: background .2s;
+    }
+    .nav-pills .nav-link:hover { background: rgb(4, 4, 128); }
+    .nav-pills .nav-link.active { background: red; }
+    @media (max-width:768px) { .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; } }
+ 
+  </style>
+</head>
+<body tabindex="0">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-python.html">Python</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-numpy.html">NumPy</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-ml.html">ML</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-dl.html">DL</a></li>
+          <li class="nav-item"><a class="nav-link active" href="learn-viz.html">Visualization</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>📊 Data Visualization Module</h1>
+    <p class="lead">Learn to tell stories with data using Matplotlib, Seaborn & Plotly</p>
+  </header>
+
+  <!-- Sub-menu -->
+  <nav class="container py-2">
+    <ul class="nav nav-pills justify-content-center">
+      <li class="nav-item"><a class="nav-link" href="learn-python.html">🐍 Python</a></li>
+      <li class="nav-item"><a class="nav-link" href="learn-numpy.html">🔢 NumPy</a></li>
+      <li class="nav-item"><a class="nav-link" href="learn-ml.html">🤖 Machine Learning</a></li>
+      <li class="nav-item"><a class="nav-link" href="learn-dl.html">📚 Deep Learning</a></li>
+      <li class="nav-item"><a class="nav-link active" href="learn-viz.html">📊 Data Vizualization</a></li>
+    </ul>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <nav class="col-md-3 sidebar" id="lesson-nav">
+        <h5 class="fw-bold mb-3">Viz Roadmap</h5>
+        <a href="#intro">1. Introduction</a>
+        <a href="#pyplot">2. Pyplot API</a>
+        <a href="#fig-ax">3. Figure & Axes</a>
+        <a href="#styles">4. Styles & Themes</a>
+        <a href="#line">5. Line Plots</a>
+        <a href="#scatter">6. Scatter Plots</a>
+        <a href="#bar">7. Bar Charts</a>
+        <a href="#hist">8. Histograms</a>
+        <a href="#box">9. Box Plots</a>
+        <a href="#pie">10. Pie Charts</a>
+        <a href="#subplots">11. Subplots</a>
+        <a href="#custom">12. Customizations</a>
+        <a href="#legends">13. Legends & Annotations</a>
+        <a href="#3d">14. 3D Plots</a>
+        <a href="#seaborn">15. Seaborn Intro</a>
+        <a href="#sns-plots">16. Seaborn Plots</a>
+        <a href="#plotly">17. Plotly Basics</a>
+        <a href="#interactive">18. Interactive Charts</a>
+        <a href="#saving">19. Saving Figures</a>
+        <a href="#projects">20. Mini-Projects</a>
+      </nav>
+
+      <!-- Content -->
+      <div class="col-md-9 py-4 px-4">
+
+        <!-- Pager -->
+        <div id="pageNav" class="d-flex justify-content-between align-items-center my-3">
+          <button id="prevPageBtn" class="btn btn-outline-primary">Prev Page</button>
+          <span id="pageIndicator">Page 1 / 4</span>
+          <button id="nextPageBtn" class="btn btn-outline-primary">Next Page</button>
+        </div>
+
+        <!-- 1. Introduction -->
+        <section id="intro" class="mb-5">
+          <h2>1. Introduction</h2>
+          <p>Data visualization transforms raw numbers into intuitive graphical representations, enabling insight discovery and storytelling. We’ll start with Matplotlib’s low-level API, then use Seaborn’s high-level plots and finish with interactive Plotly.</p>
+        </section>
+
+        <!-- 2. Pyplot API -->
+        <section id="pyplot" class="mb-5">
+          <h2>2. Pyplot API</h2>
+          <p><code>matplotlib.pyplot</code> provides MATLAB-style functions for creating figures and plots with simple commands.</p>
+          <pre><code>import matplotlib.pyplot as plt
+plt.plot([1,2,3],[4,5,6])
+plt.show()</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 3. Figure & Axes -->
+        <section id="fig-ax" class="mb-5">
+          <h2>3. Figure & Axes</h2>
+          <p>Create fine-tuned layouts by explicitly managing <code>Figure</code> and <code>Axes</code> objects.</p>
+          <pre><code>fig, ax = plt.subplots(figsize=(6,4))
+ax.plot(x, y)
+ax.set_title('Title')
+plt.show()</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 4. Styles & Themes -->
+        <section id="styles" class="mb-5">
+          <h2>4. Styles & Themes</h2>
+          <p>Use built-in styles for quick aesthetic changes:</p>
+          <pre><code>plt.style.use('seaborn-darkgrid')
+plt.plot(x, y)</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 5. Line Plots -->
+        <section id="line" class="mb-5">
+          <h2>5. Line Plots</h2>
+          <p>Plot continuous trends with markers and custom lines:</p>
+          <pre><code>ax.plot(x, y, marker='o', linestyle='--', color='C0')</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 6. Scatter Plots -->
+        <section id="scatter" class="mb-5">
+          <h2>6. Scatter Plots</h2>
+          <p>Visualize point distributions with size and color scales:</p>
+          <pre><code>ax.scatter(x, y, s=50, c=z, cmap='viridis')</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 7. Bar Charts -->
+        <section id="bar" class="mb-5">
+          <h2>7. Bar Charts</h2>
+          <p>Compare categorical data:</p>
+          <pre><code>ax.bar(categories, values, color='C1')</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 8. Histograms -->
+        <section id="hist" class="mb-5">
+          <h2>8. Histograms</h2>
+          <p>Plot distributions of numerical data:</p>
+          <pre><code>ax.hist(data, bins=20, alpha=0.7)</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 9. Box Plots -->
+        <section id="box" class="mb-5">
+          <h2>9. Box Plots</h2>
+          <p>Visualize quartiles and outliers:</p>
+          <pre><code>ax.boxplot([group1, group2])</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 10. Pie Charts -->
+        <section id="pie" class="mb-5">
+          <h2>10. Pie Charts</h2>
+          <p>Show proportions with labels:</p>
+          <pre><code>ax.pie(sizes, labels=labels, autopct='%1.1f%%')</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 11. Subplots -->
+        <section id="subplots" class="mb-5">
+          <h2>11. Subplots</h2>
+          <p>Create grids of plots for comparison:</p>
+          <pre><code>fig, axs = plt.subplots(2,2, figsize=(8,6))</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 12. Customizations -->
+        <section id="custom" class="mb-5">
+          <h2>12. Customizations</h2>
+          <p>Add titles, labels, ticks, grid:</p>
+          <pre><code>ax.set_xlabel('X axis')
+ax.set_ylabel('Y axis')
+ax.grid(True)</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 13. Legends & Annotations -->
+        <section id="legends" class="mb-5">
+          <h2>13. Legends & Annotations</h2>
+          <p>Add legends and annotate points:</p>
+          <pre><code>ax.legend(['Series A'])
+ax.annotate('Max', xy=(x_max, y_max), xytext=(x_max+1, y_max+1),
+            arrowprops=dict(arrowstyle='->'))</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 14. 3D Plots -->
+        <section id="3d" class="mb-5">
+          <h2>14. 3D Plots</h2>
+          <p>Use Matplotlib’s mplot3d toolkit:</p>
+          <pre><code>from mpl_toolkits.mplot3d import Axes3D
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(x, y, z)</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 15. Seaborn Intro -->
+        <section id="seaborn" class="mb-5">
+          <h2>15. Seaborn Intro</h2>
+          <p>High-level statistical plots built on Matplotlib.</p>
+          <pre><code>import seaborn as sns
+sns.set_style('darkgrid')</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 16. Seaborn Plots -->
+        <section id="sns-plots" class="mb-5">
+          <h2>16. Seaborn Plots</h2>
+          <p>Examples:</p>
+          <pre><code>sns.histplot(data)
+sns.scatterplot(x='col1', y='col2', data=df)
+sns.heatmap(df.corr(), annot=True)</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 17. Plotly Basics -->
+        <section id="plotly" class="mb-5">
+          <h2>17. Plotly Basics</h2>
+          <p>Interactive charts with Plotly Express:</p>
+          <pre><code>import plotly.express as px
+fig = px.scatter(df, x='col1', y='col2')
+fig.show()</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 18. Interactive Charts -->
+        <section id="interactive" class="mb-5">
+          <h2>18. Interactive Charts</h2>
+          <p>Enable zoom, hover, and export in Plotly and Bokeh.</p>
+        </section>
+
+        <!-- 19. Saving Figures -->
+        <section id="saving" class="mb-5">
+          <h2>19. Saving Figures</h2>
+          <pre><code>plt.savefig('figure.png', dpi=300, bbox_inches='tight')</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 20. Mini-Projects -->
+        <section id="projects" class="mb-5">
+          <h2>20. Mini-Projects</h2>
+          <ul>
+            <li><strong>Sales Dashboard:</strong> Create multi-chart dashboard from CSV sales data.</li>
+            <li><strong>Correlation Heatmap:</strong> Visualize feature correlations and annotate.</li>
+            <li><strong>Interactive Map:</strong> Plot geospatial data with Plotly or Folium.</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration:700, once:true, anchorPlacement:'top-bottom' });
+
+    // Pagination
+    document.addEventListener('DOMContentLoaded', () => {
+      const secs = Array.from(document.querySelectorAll('section'));
+      const perPage = 5, total = secs.length, totalPages = Math.ceil(total/perPage);
+      let current = 1;
+      const prev = document.getElementById('prevPageBtn'),
+            next = document.getElementById('nextPageBtn'),
+            ind  = document.getElementById('pageIndicator'),
+            links= Array.from(document.querySelectorAll('#lesson-nav a'));
+
+      function render() {
+        secs.forEach((s,i) => s.style.display = Math.floor(i/perPage)+1===current?'block':'none');
+        prev.disabled = current===1;
+        next.disabled = current===totalPages;
+        ind.textContent = `Page ${current} / ${totalPages}`;
+      }
+      prev.onclick = ()=>{ if(current>1) current--,render(); };
+      next.onclick = ()=>{ if(current<totalPages) current++,render(); };
+      links.forEach(l=>l.addEventListener('click', e=>{
+        e.preventDefault();
+        const id = l.getAttribute('href').slice(1),
+              idx= secs.findIndex(s=>s.id===id);
+        if(idx>-1){
+          current = Math.floor(idx/perPage)+1;
+          render();
+          document.getElementById(id).scrollIntoView({behavior:'smooth'});
+        }
+      }));
+      render();
+    });
+
+    
+    function copyCode(btn) {
+      const txt = btn.closest('section').querySelector('pre code').innerText;
+      navigator.clipboard.writeText(txt).then(()=>{
+        const orig = btn.textContent;
+        btn.textContent='Copied!';
+        setTimeout(()=>btn.textContent=orig,1500);
+      });
+    }
+  </script>
+<script>
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    const fadeStart = 0;
+    const fadeEnd   = header.offsetHeight * 0.75;
+    const y         = window.scrollY;
+    let opacity = 1;
+    if (y > fadeStart) {
+      opacity = Math.max(0, 1 - (y - fadeStart) / (fadeEnd - fadeStart));
+    }
+    header.style.opacity = opacity;
+  });
+</script>
+
+
+</body>
+</html>
