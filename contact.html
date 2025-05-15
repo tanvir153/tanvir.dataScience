@@ -4,19 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Tanvir DS</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  >
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f8f9fa;
     }
     .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background: linear-gradient(to right, #434343, #000000);
       color: white;
       padding: 60px 20px;
       text-align: center;
+      transition: opacity 0.5s ease-out;
     }
+    .header h1 { margin-bottom: 0.3em; }
     form {
       background: #ffffff;
       padding: 30px;
@@ -29,81 +44,134 @@
     }
     .social-icons a {
       margin: 0 10px;
-      color: #333;
+      color: #1409ee;
       font-size: 24px;
+      transition: color .2s;
+    }
+    .social-icons a:hover {
+      color: #f0068b;
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">Tanvir DS</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navmenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
-        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Header -->
-<section class="hero" data-aos="fade-up">
-  <h1>Contact Me</h1>
-  <p class="lead">Have questions or want to collaborate? Send me a message below.</p>
-</header>
-
-<!-- Contact Form -->
-<section class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-
-      <form action="https://formspree.io/f/your-id-here" method="POST">
-        <div class="mb-3">
-          <label for="name" class="form-label">Your Name</label>
-          <input type="text" name="name" id="name" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Your Email</label>
-          <input type="email" name="_replyto" id="email" class="form-control" required />
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Your Message</label>
-          <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Send Message</button>
-      </form>
-
-      <div class="text-center mt-4 social-icons">
-        <a href="https://github.com/yourgithub" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
-        <a href="https://linkedin.com/in/yourlinkedin" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:@example.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
-        
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        </ul>
       </div>
-
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- Footer -->
-<footer class="text-center py-4 bg-dark text-light mt-5">
-  <p>© 2025 Tanvir Sardarr | <a href="mailto:you@example.com" class="text-warning">Email</a> | <a href="https://github.com/yourgithub" class="text-warning">GitHub</a></p>
-</footer>
+  <!-- Header -->
+  <header class="header" data-aos="fade-up">
+    <h1>Contact Me</h1>
+    <p class="lead">Have questions or want to collaborate? Send me a message below.</p>
+  </header>
 
+  <!-- Contact Form -->
+  <section class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
 
-<!-- Bootstrap & AOS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script>AOS.init();</script>
+        <form id="contactForm"
+              action="https://script.google.com/macros/s/AKfycbzuE3gpy1Jm6bUjzHZ7a7subiV7OJe8NW5e5FM-uhBUgn_eOVam0tMrsz5utaS_T-ij/exec"
+              method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" name="name" id="name" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" name="email" id="email" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Send Message</button>
+        </form>
+
+        <!-- Success Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Thank you!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <p>Your message has been sent successfully.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="text-center mt-4 social-icons">
+          <a href="https://github.com/tanvir153" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/tanvir153/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="mailto:tanvir.xf@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-dark text-light mt-5">
+    <p>© 2025 Tanvir Sardarr | <a href="mailto:tanvir.xf@gmail.com" class="text-warning">Email Me</a> | <a href="https://github.com/tanvir153" class="text-warning">GitHub</a></p>
+  </footer>
+
+  <!-- Bootstrap & AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({ duration: 700, once: true, anchorPlacement: 'top-bottom' });
+
+    // fade header on scroll
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+      const fadeEnd = header.offsetHeight * 0.75;
+      let y = window.scrollY;
+      let o = y <= 0 ? 1 : Math.max(0, 1 - y / fadeEnd);
+      header.style.opacity = o;
+    });
+
+    // AJAX form submission + success modal
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const data = new FormData(form);
+        try {
+          await fetch(form.action, { method: 'POST', body: data });
+          // show modal
+          new bootstrap.Modal(document.getElementById('successModal')).show();
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          alert('Oops! Something went wrong. Please try again.');
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
