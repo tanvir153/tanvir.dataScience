@@ -4,119 +4,211 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Reviews | Tanvir DS</title>
+
+  <!-- Bootstrap CSS -->
   <link 
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
     rel="stylesheet"/>
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
   <style>
     body { font-family:'Segoe UI',sans-serif; background:#f8f9fa; }
-    .review-card {
-      background:#fff;
-      padding:1rem;
-      border-radius:.5rem;
-      box-shadow:0 0 8px rgba(0,0,0,.05);
+
+    /* yellow stars by default, grey for the “unfilled” ones */
+    .star { 
+      cursor: pointer; 
+      font-size: 1.5rem; 
+      color: #ffc107;
     }
-    .field-label { font-weight:600; }
-    .star { color:#ffc107; margin-right:4px; }
-    .star.text-muted { color:#ddd; }
+    .star.muted {
+      color: #ccc;
+    }
+
+    .review-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: .5rem;
+      box-shadow: 0 0 8px rgba(0,0,0,.05);
+      transition: transform .3s ease;
+    }
+    .review-card:hover {
+      transform: scale(1.02);
+    }
+    .review-card p.comment {
+      white-space: pre-wrap;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Tanvir DS</a>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navmenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="review.html">Reviews</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <header class="bg-primary text-white text-center py-5 mb-4">
-    <h1>🌟 Student Reviews</h1>
-    <p class="lead">Leave your feedback below—and see what others have said!</p>
-  </header>
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down">
   <div class="container">
-
-    <!-- 1) Your embedded Google Form -->
-    <div class="mb-5">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLScttItEWGreC6BoWzmMonpt0zd1XwIGhxXAZQ_J18LXDSR3tA/viewform?embedded=true"
-        width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">
-        Loading…
-      </iframe>
+    <a class="navbar-brand" href="index.html">Tanvir DS</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link active" href="review.html">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <!-- 2) Dashboard of all responses -->
-    <h2 class="mb-4">What People Are Saying</h2>
-    <div id="reviewsList" class="row g-4 mb-5">
-      <!-- JS will inject .review-card columns here -->
-    </div>
+<header class="bg-primary text-white text-center py-5 mb-4" data-aos="fade-up">
+  <h1>🌟 Student Reviews</h1>
+  <p class="lead">Leave your feedback below—and see what others have said!</p>
+</header>
 
+<div class="container">
+
+  <!-- Leave-a-Review button -->
+  <div id="openFormButton" class="text-center mb-4" data-aos="zoom-in">
+    <button id="reviewBtn" class="btn btn-lg btn-outline-primary">
+      Leave a Review
+    </button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    //  • your published‐CSV URL (entire sheet as CSV)
-    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuUC8sCOJdvwZemHRQxs0kuaZFaxsmrIcigiYflbOgqmEW14tuILwgS3QDx7tXnheyyu8q4yTNitjV/pub?output=csv';
+  <!-- Google Form (hidden until clicked) -->
+  <div id="formSection" class="mb-5" style="display:none" data-aos="fade-up">
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLScttItEWGreC6BoWzmMonpt0zd1XwIGhxXAZQ_J18LXDSR3tA/viewform?embedded=true"
+      width="100%" height="1600" frameborder="0" marginheight="0" marginwidth="0">
+      Loading…
+    </iframe>
+    <div class="text-center mt-3">
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLScttItEWGreC6BoWzmMonpt0zd1XwIGhxXAZQ_J18LXDSR3tA/viewform"
+        target="_blank"
+        class="btn btn-secondary"
+      >Open Form in New Tab</a>
+    </div>
+  </div>
 
-    //  simple CSV → JSON
-    function parseCSV(text) {
-      const lines   = text.trim().split('\n');
-      const headers = lines.shift().split(',').map(h=>h.replace(/^"|"$/g,''));
-      return lines.map(line => {
-        const cols = (line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || []);
-        const obj  = {};
-        headers.forEach((h,i)=> obj[h] = (cols[i]||'').replace(/^"|"$/g,''));
-        return obj;
-      });
-    }
+  <!-- Reviews Dashboard (shows immediately) -->
+  <div id="reviewsSection" data-aos="fade-up" data-aos-delay="100">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>What People Are Saying</h2>
+      <button id="refreshBtn" class="btn btn-sm btn-outline-light">Refresh Reviews</button>
+    </div>
+    <div id="reviewsList" class="row g-4 mb-5">
+      <!-- cards get injected here -->
+    </div>
+  </div>
+</div>
 
-    //  ★★★☆☆ string
-    function starString(n) {
-      n = +n;
-      return '<span class="star">' + '★'.repeat(n) + '</span>'
-           + '<span class="star text-muted">' + '★'.repeat(5-n) + '</span>';
-    }
+<!-- Bootstrap & AOS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    //  fetch + render
-    async function loadReviews() {
-      try {
-        const res  = await fetch(CSV_URL);
-        const text = await res.text();
-        const rows = parseCSV(text);
-        const container = document.getElementById('reviewsList');
+<script>
+  AOS.init({ duration: 600, once: true });
 
-        container.innerHTML = rows.reverse().map(row => {
-          // build a <p> for each column
-          const fields = Object.entries(row).map(([key,val]) => {
-            if (/rating/i.test(key)) {
-              return `<p><span class="field-label">${key}:</span> ${starString(val)}</p>`;
-            }
-            return `<p><span class="field-label">${key}:</span> ${val}</p>`;
-          }).join('');
+  const CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuUC8sCOJdvwZemHRQxs0kuaZFaxsmrIcigiYflbOgqmEW14tuILwgS3QDx7tXnheyyu8q4yTNitjV/pub?gid=1042448649&single=true&output=csv';
 
-          return `
-            <div class="col-md-4">
-              <div class="review-card">
-                ${fields}
-              </div>
-            </div>
-          `;
-        }).join('');
+  function parseCSV(txt) {
+    const lines = txt.trim().split('\n');
+    const headers = lines.shift()
+      .split(',')
+      .map(h => h.replace(/^"|"$/g, '').trim());
 
-      } catch(e) {
-        console.error('Could not load reviews:', e);
+    return lines.map(line => {
+      const cols = [];
+      let cur = '', inQuotes = false;
+      for (let ch of line) {
+        if (ch === '"') {
+          inQuotes = !inQuotes;
+        } else if (ch === ',' && !inQuotes) {
+          cols.push(cur);
+          cur = '';
+        } else {
+          cur += ch;
+        }
       }
-    }
+      cols.push(cur);
+      const obj = {};
+      headers.forEach((h,i) => {
+        obj[h] = (cols[i] || '').replace(/^"|"$/g, '').trim();
+      });
+      return obj;
+    });
+  }
 
-    window.addEventListener('DOMContentLoaded', loadReviews);
-  </script>
+  function starString(n) {
+    n = +n;
+    return '<span class="star">' + '★'.repeat(n) + '</span>'
+         + '<span class="star muted">' + '★'.repeat(5-n) + '</span>';
+  }
+
+  async function loadReviews() {
+    try {
+      // bust cache
+      const url = CSV_URL + '&cb=' + Date.now();
+      const res = await fetch(url);
+      const text = await res.text();
+      const data = parseCSV(text);
+      if (!data.length) return;
+
+      const keys = Object.keys(data[0]);
+      const nameKey       = keys.find(k=>/name/i.test(k));
+      const ratingKey     = keys.find(k=>/rating/i.test(k));
+      const occupationKey = keys.find(k=>/occupation/i.test(k));
+      const companyKey    = keys.find(k=>/institution|company/i.test(k));
+      const commentsKey   = keys.find(k=>/comment/i.test(k));
+      const timeKey       = keys.find(k=>/time/i.test(k));
+
+      const html = data.reverse().map((r,i) => `
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="${i*50}">
+          <div class="review-card">
+            <h5>${r[nameKey]||''}</h5>
+            <p>${starString(r[ratingKey]||0)}</p>
+            <p><strong>Occupation:</strong> ${r[occupationKey]||''}</p>
+            <p><strong>Company:</strong> ${r[companyKey]||''}</p>
+            <p class="comment">${r[commentsKey]||''}</p>
+            <small class="text-muted">
+              ${ new Date(r[timeKey]).toLocaleString()||'' }
+            </small>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('reviewsList').innerHTML = html;
+    } catch(err) {
+      console.error('Error loading reviews', err);
+    }
+  }
+
+  // toggle form
+  document.getElementById('reviewBtn').addEventListener('click', () => {
+    document.getElementById('openFormButton').style.display = 'none';
+    document.getElementById('formSection').style.display   = 'block';
+    document.getElementById('formSection')
+            .scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // iframe submit -> reload
+  const iframe = document.querySelector('#formSection iframe');
+  iframe.addEventListener('load', () => {
+    if (!iframe.contentWindow.location.href.includes('formResponse')) {
+      document.getElementById('formSection').style.display = 'none';
+      loadReviews();
+    }
+  });
+
+  // manual refresh
+  document.getElementById('refreshBtn')
+    .addEventListener('click', loadReviews);
+
+  // initial load
+  document.addEventListener('DOMContentLoaded', loadReviews);
+</script>
 </body>
 </html>
