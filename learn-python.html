@@ -13,9 +13,9 @@
       background: #f9f9fb;
     }
     .header {
-      background: linear-gradient(to right, #005c97, #363795);
+      background: linear-gradient(to right, #9af202, #070bef);
       color: white;
-      padding: 60px 20px;
+      padding: 30px;
       text-align: center;
     }
     #pageNav {
@@ -110,6 +110,21 @@
     @media (max-width:768px) {
       .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; }
     }
+      /* Sub-menu pills styling */
+    .nav-pills .nav-link {
+      color: hsl(258, 94%, 49%);
+      background: rgba(79, 238, 5, 0.2);
+      margin: 0 4px;
+      transition: background .2s;
+    }
+    .nav-pills .nav-link:hover {
+      background: rgb(3, 122, 241);
+      color: #e1efff;
+    }
+    .nav-pills .nav-link.active {
+      background: #f57c03;
+    }
+    @media (max-width:768px) { .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; } }
   </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#lesson-nav" data-bs-offset="100" tabindex="0">
@@ -137,7 +152,28 @@
   <header class="header">
     <h1>🐍 Python Basics</h1>
     <p class="lead">Learn how to code with Python – the foundation of Data Science!</p>
+        <!-- Sub-menu: Course Navigation -->
   </header>
+    <nav class="container py-2">
+    <ul class="nav nav-pills justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" href="learn-python.html">🐍 Python Basics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-numpy.html">🔢 NumPy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-ml.html">🤖 Machine Learning</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-dl.html">📚 Deep Learning</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="learn-viz.html">📊 Data Visualization</a>
+      </li>
+    </ul>
+  </nav>
+
 
   <div class="container-fluid">
     <div class="row">
