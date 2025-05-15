@@ -1,159 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Reviews | Tanvir DS</title>
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
-  <!-- AOS CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Reviews | Tanvir DS</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet"/>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fa;
-    }
-    .header {
-      background: linear-gradient(to right, #b0c402, #0950eb);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .review-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.05);
-      height: 100%;
-    }
-    .review-card .bi {
-      color: #ffc107;
-      margin-right: 2px;
-    }
+    body { font-family:'Segoe UI',sans-serif; background:#f8f9fa }
+    .star { cursor:pointer; font-size:1.5rem; color:#ccc; }
+    .star.filled { color:#ffc107; }
+    .review-card { background:#fff; padding:1rem; border-radius:.5rem; box-shadow:0 0 8px rgba(0,0,0,.05);}
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-aos="fade-down">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Tanvir DS</a>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navmenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
-          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link active" href="#">Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Tanvir DS</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">Reviews</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Header -->
-  <header class="header" data-aos="fade-up">
-    <h1>Student Reviews & Feedback</h1>
-    <p class="lead">See what learners are saying about Tanvir's courses and resources.</p>
-  </header>
+<header class="bg-primary text-white text-center py-5 mb-4">
+  <h1>🌟 Student Reviews</h1>
+  <p class="lead">Leave your feedback below!</p>
+</header>
 
-  <!-- Reviews Section -->
-  <section class="container py-5" data-aos="fade-up" data-aos-delay="100">
-    <div class="row g-4">
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-        <div class="review-card">
-          <h5>Ayaan Ahmed</h5>
-          <p>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-half"></i>
-          </p>
-          <p>The machine learning section is superb! Clear examples and practical Colab links. Loved it!</p>
-        </div>
-      </div>
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-        <div class="review-card">
-          <h5>Sadia Rahman</h5>
-          <p>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-          </p>
-          <p>This is better than paid platforms. Everything is organized step-by-step and easy to follow.</p>
-        </div>
-      </div>
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
-        <div class="review-card">
-          <h5>Imran Kabir</h5>
-          <p>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-          </p>
-          <p>I used the dropout predictor for my thesis — it saved me weeks of work. Thanks Tanvir bhai!</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="container">
 
   <!-- Review Form -->
-  <section class="container py-5" data-aos="fade-up" data-aos-delay="500">
-    <h3 class="mb-4" data-aos="fade-right" data-aos-delay="600">📝 Submit Your Review</h3>
-    <form action="https://formspree.io/f/your-id-here" method="POST">
-      <div class="mb-3" data-aos="fade-left" data-aos-delay="700">
-        <label for="name" class="form-label">Your Name</label>
-        <input type="text" name="name" id="name" class="form-control" required/>
+  <div class="card mb-5 p-4">
+    <h4>Submit a Review</h4>
+    <form id="reviewForm" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" required/>
       </div>
-      <div class="mb-3" data-aos="fade-left" data-aos-delay="800">
-        <label for="rating" class="form-label">Rating (1 to 5)</label>
-        <select name="rating" class="form-select" required>
-          <option value="">Choose...</option>
-          <option>⭐ 1</option>
-          <option>⭐⭐ 2</option>
-          <option>⭐⭐⭐ 3</option>
-          <option>⭐⭐⭐⭐ 4</option>
-          <option>⭐⭐⭐⭐⭐ 5</option>
-        </select>
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" required/>
       </div>
-      <div class="mb-3" data-aos="fade-left" data-aos-delay="900">
-        <label for="message" class="form-label">Your Review</label>
-        <textarea name="message" id="message" rows="4" class="form-control" required></textarea>
+
+      <div class="col-12">
+        <label class="form-label">Rating</label>
+        <div id="starContainer">
+          <span class="star" data-value="1">&#9733;</span>
+          <span class="star" data-value="2">&#9733;</span>
+          <span class="star" data-value="3">&#9733;</span>
+          <span class="star" data-value="4">&#9733;</span>
+          <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <input type="hidden" name="rating" id="rating" value="0" required/>
       </div>
-      <button type="submit" class="btn btn-primary" data-aos="zoom-in" data-aos-delay="1000">
-        Submit Review
-      </button>
+
+      <div class="col-12">
+        <label class="form-label">Comment</label>
+        <textarea name="comment" class="form-control" rows="3" required></textarea>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-success">Submit Review</button>
+      </div>
     </form>
-  </section>
+  </div>
 
-  <!-- Footer -->
-  <footer class="text-center py-4 bg-dark text-light mt-5" data-aos="fade-up" data-aos-delay="1100">
-    <p>© 2025 Tanvir Sardarr | 
-      <a href="https://github.com/tanvir153" class="text-warning">GitHub</a> | 
-      <a href="mailto:tanvir.xf@gmail.com" class="text-warning">Email</a>
-    </p>
-  </footer>
+  <!-- Reviews List -->
+  <div id="reviewsList" class="row g-4">
+    <!-- Javascript will populate cards here -->
+  </div>
+</div>
 
-  <!-- Bootstrap & AOS JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 700,
-      once: true,
-      anchorPlacement: 'top-bottom'
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const API_URL = 'YOUR_WEB_APP_URL_HERE'; // ← paste your Apps Script URL
+
+  // star rating UI
+  const stars = document.querySelectorAll('.star');
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const val = +star.dataset.value;
+      document.getElementById('rating').value = val;
+      stars.forEach(s => s.classList.toggle('filled', +s.dataset.value <= val));
     });
-  </script>
+  });
+
+  // fetch & render reviews
+  async function loadReviews() {
+    const res = await fetch(API_URL);
+    const reviews = await res.json();
+    const container = document.getElementById('reviewsList');
+    container.innerHTML = reviews
+      .sort((a,b)=> new Date(b.timestamp) - new Date(a.timestamp))
+      .map(r => `
+        <div class="col-md-4">
+          <div class="review-card">
+            <h5>${r.name}</h5>
+            <p class="mb-1">
+              ${Array(r.rating).fill('&#9733;').join('')}
+              ${Array(5-r.rating).fill('&#9734;').join('')}
+            </p>
+            <p>${r.comment}</p>
+            <small class="text-muted">${new Date(r.timestamp).toLocaleString()}</small>
+          </div>
+        </div>
+      `).join('');
+  }
+
+  // form submission via AJAX
+  document.getElementById('reviewForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      await fetch(API_URL, { method: 'POST', body: data });
+      form.reset();
+      stars.forEach(s => s.classList.remove('filled'));
+      loadReviews();
+      alert('Thank you! Your review has been submitted.');
+    } catch(err) {
+      console.error(err);
+      alert('Submission failed – please try again.');
+    }
+  });
+
+  // initial load
+  window.addEventListener('DOMContentLoaded', loadReviews);
+</script>
 </body>
 </html>
