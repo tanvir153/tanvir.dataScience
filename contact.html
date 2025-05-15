@@ -87,7 +87,7 @@
       <div class="col-md-8">
 
         <form id="contactForm"
-              action="https://script.google.com/macros/s/AKfycbzuE3gpy1Jm6bUjzHZ7a7subiV7OJe8NW5e5FM-uhBUgn_eOVam0tMrsz5utaS_T-ij/exec"
+              action="https://script.google.com/macros/s/AKfycbwXvh3q4q3d8MFbltAeOSgKzS5TOl4xqUrR3lmtNWW62WiPaYHFqxuwU6u6fO9TjcpQ/exec"
               method="POST">
           <div class="mb-3">
             <label for="name" class="form-label">Your Name</label>
@@ -154,14 +154,18 @@
       header.style.opacity = o;
     });
 
-    // AJAX form submission + success modal
+    // AJAX form submission + success modal (with CORS)
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('contactForm');
       form.addEventListener('submit', async e => {
         e.preventDefault();
         const data = new FormData(form);
         try {
-          await fetch(form.action, { method: 'POST', body: data });
+          await fetch(form.action, {
+            method: 'POST',
+            mode: 'cors',
+            body: data
+          });
           // show modal
           new bootstrap.Modal(document.getElementById('successModal')).show();
           form.reset();
