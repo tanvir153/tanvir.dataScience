@@ -3,122 +3,489 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Machine Learning | Tanvir Teaches Data Science</title>
+  <title>Machine Learning Module | Tanvir Teaches Data Science</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f9f9fb;
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9fb; }
+    .header { background: linear-gradient(to right, #09eb33, #4103df); color: white; padding: 30px; text-align: center; }
+    #pageNav { border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+    #pageNav button:disabled { opacity: 0.5; cursor: not-allowed; }
+    pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; }
+    .code-actions { display: flex; gap: 8px; margin-top: 0.5em; }
+    .copy-btn, .try-btn { padding: 4px 8px; font-size: 12px; border: 1px solid; border-radius: 3px; cursor: pointer; }
+    .copy-btn { background: #fff; color: #333; border-color: #ccc; }
+    .try-btn { background: #f0f8ff; color: #0d6efd; border-color: #0d6efd; }
+    .copy-btn:hover { background: #f8f8f8; }
+    .try-btn:hover  { background: #e1efff; }
+    .editor-modal { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    .editor-container { background: #fff; width: 80%; max-width: 800px; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+    .editor-header { background: #f5f5f5; padding: 8px; text-align: right; }
+    .close-btn { background: none; border: none; font-size: 1.5em; cursor: pointer; }
+    .editor { height: 300px; }
+    .editor-actions { padding: 8px; background: #fafafa; display: flex; gap: 8px; }
+    .run-btn, .check-btn { padding: 6px 12px; border: none; cursor: pointer; font-size: 0.9em; border-radius: 4px; }
+    .run-btn { background: #0d6efd; color: #fff; }
+    .check-btn { background: #198754; color: #fff; }
+    .output { background: #1e1e1e; color: #ddd; padding: 12px; margin: 0; height: 120px; overflow-y: auto; font-family: monospace; }
+    .check-result { padding: 8px; font-weight: bold; text-align: center; }
+    .sidebar { position: sticky; top:20px; background:#fff; padding:15px; border-right:1px solid #ddd; height:calc(100vh - 40px); overflow-y:auto; }
+    .sidebar a { display:block; margin-bottom:10px; color:#333; text-decoration:none; }
+    .sidebar a:hover, .sidebar a.active { text-decoration:underline; font-weight:bold; }
+    .nav-pills .nav-link {
+      color: #fff; background:rgb(128, 128, 234); margin: 0 4px; transition: background .2s;
     }
-    .header {
-      background: linear-gradient(to right, #0f2027, #e6219e);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    pre {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
-    .quiz-box {
-      background: #e3f2fd;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 30px;
-    }
+    .nav-pills .nav-link:hover { background: rgb(4, 4, 128); }
+    .nav-pills .nav-link.active { background: red; }
+    @media (max-width:768px) { .sidebar { position:static; border-right:none; height:auto; margin-bottom:20px; } }
   </style>
 </head>
-<body>
+<body tabindex="0">
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">Tanvir DS</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-     <div class="collapse navbar-collapse" id="navmenu">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-python.html">Python</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-numpy.html">NumPy</a></li>
+          <li class="nav-item"><a class="nav-link active" href="learn-ml.html">Machine Learning</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-dl.html">Deep Learning</a></li>
+          <li class="nav-item"><a class="nav-link" href="learn-viz.html">Visualization</a></li>
         </ul>
       </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>🤖 Machine Learning Module</h1>
+    <p class="lead">Core algorithms, model building & evaluation with Python</p>
+  </header>
+
+  <!-- Sub-menu -->
+  <nav class="container py-2">
+    <ul class="nav nav-pills justify-content-center">
+      <li class="nav-item"><a class="nav-link" href="learn-python.html">🐍 Python</a></li>
+      <li class="nav-item"><a class="nav-link" href="learn-numpy.html">🔢 NumPy</a></li>
+      <li class="nav-item"><a class="nav-link active" href="learn-ml.html">🤖 Machine Learning</a></li>
+      <li class="nav-item"><a class="nav-link" href="learn-dl.html">📚 Deep Learning</a></li>
+      <li class="nav-item"><a class="nav-link" href="learn-viz.html">📊 Data Vizualization</a></li>
+    </ul>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <nav class="col-md-3 sidebar" id="lesson-nav">
+        <h5 class="fw-bold mb-3">ML Roadmap</h5>
+        <a href="#intro">1. Introduction</a>
+        <a href="#supervised">2. Supervised Learning</a>
+        <a href="#lin-reg">3. Linear Regression</a>
+        <a href="#log-reg">4. Logistic Regression</a>
+        <a href="#dt">5. Decision Trees</a>
+        <a href="#svm">6. Support Vector Machines</a>
+        <a href="#knn">7. K-Nearest Neighbors</a>
+        <a href="#ensemble">8. Ensemble Methods</a>
+        <a href="#bayes">9. Naïve Bayes</a>
+        <a href="#clustering">10. Clustering</a>
+        <a href="#dimred">11. Dimensionality Reduction</a>
+        <a href="#feature">12. Feature Engineering</a>
+        <a href="#pipeline">13. Pipelines</a>
+        <a href="#eval">14. Model Evaluation</a>
+        <a href="#cv">15. Cross-Validation</a>
+        <a href="#grid">16. Hyperparameter Tuning</a>
+        <a href="#scaling">17. Scaling & Normalization</a>
+        <a href="#imbalanced">18. Handling Imbalanced Data</a>
+        <a href="#interpret">19. Model Interpretability</a>
+        <a href="#projects">20. Mini-Projects</a>
+      </nav>
+
+      <!-- Content -->
+      <div class="col-md-9 py-4 px-4">
+
+        <!-- Pager -->
+        <div id="pageNav" class="d-flex justify-content-between align-items-center my-3">
+          <button id="prevPageBtn" class="btn btn-outline-primary">Prev Page</button>
+          <span id="pageIndicator">Page 1 / 4</span>
+          <button id="nextPageBtn" class="btn btn-outline-primary">Next Page</button>
+        </div>
+
+        <!-- 1. Introduction -->
+        <section id="intro" class="mb-5">
+          <h2>1. Introduction</h2>
+          <p>
+            Machine Learning lets computers learn patterns and make predictions from data without
+            being explicitly programmed. We’ll cover core algorithms, data preparation, and
+            evaluation metrics to build robust models.
+          </p>
+        </section>
+
+        <!-- 2. Supervised Learning -->
+        <section id="supervised" class="mb-5">
+          <h2>2. Supervised Learning</h2>
+          <p>
+            In supervised learning, we train on labeled data (features → target). Tasks include
+            <em>regression</em> (continuous target) and <em>classification</em> (discrete labels).
+          </p>
+        </section>
+
+        <!-- 3. Linear Regression -->
+        <section id="lin-reg" class="mb-5">
+          <h2>3. Linear Regression</h2>
+          <p>
+            Fits a line y=wx+b minimizing MSE. Closed-form solution via normal equation or
+            iterative gradient descent.
+          </p>
+          <pre><code>import numpy as np
+
+# Normal equation
+X = np.array([[1,1],[1,2],[1,3]])
+y = np.array([1,2,3])
+w, b = np.linalg.lstsq(X, y, rcond=None)[0]
+print(w, b)
+</code></pre>
+          <div class="code-actions">
+            <button class="try-btn" data-expected="1.0 0.0" onclick="openEditorModal(this)">Try It</button>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 4. Logistic Regression -->
+        <section id="log-reg" class="mb-5">
+          <h2>4. Logistic Regression</h2>
+          <p>
+            Classification via sigmoid on a linear model. Train by maximizing log-likelihood.
+          </p>
+          <pre><code>from sklearn.linear_model import LogisticRegression
+clf = LogisticRegression()
+# clf.fit(X_train, y_train)
+# print(clf.predict(X_test))
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 5. Decision Trees -->
+        <section id="dt" class="mb-5">
+          <h2>5. Decision Trees</h2>
+          <p>
+            Tree-structured model splitting on features to minimize impurity (Gini/entropy).
+          </p>
+          <pre><code>from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier(max_depth=3)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 6. Support Vector Machines -->
+        <section id="svm" class="mb-5">
+          <h2>6. Support Vector Machines</h2>
+          <p>
+            Finds hyperplane maximizing margin. Kernel trick allows non-linear decision boundaries.
+          </p>
+          <pre><code>from sklearn.svm import SVC
+clf = SVC(kernel='rbf', C=1.0)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 7. K-Nearest Neighbors -->
+        <section id="knn" class="mb-5">
+          <h2>7. K-Nearest Neighbors</h2>
+          <p>
+            Classifies a point by majority vote among its k nearest neighbors under a distance metric.
+          </p>
+          <pre><code>from sklearn.neighbors import KNeighborsClassifier
+clf = KNeighborsClassifier(n_neighbors=5)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 8. Ensemble Methods -->
+        <section id="ensemble" class="mb-5">
+          <h2>8. Ensemble Methods</h2>
+          <p>
+            Combine multiple models to improve stability and accuracy (bagging, boosting, stacking).
+          </p>
+          <pre><code>from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=100)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 9. Naïve Bayes -->
+        <section id="bayes" class="mb-5">
+          <h2>9. Naïve Bayes</h2>
+          <p>
+            Probabilistic classifier assuming feature independence. Fast and works well on text.
+          </p>
+          <pre><code>from sklearn.naive_bayes import GaussianNB
+clf = GaussianNB()
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 10. Clustering -->
+        <section id="clustering" class="mb-5">
+          <h2>10. Clustering</h2>
+          <p>
+            Unsupervised grouping of points. K-Means partitions into k clusters by minimizing inertia.
+          </p>
+          <pre><code>from sklearn.cluster import KMeans
+km = KMeans(n_clusters=3)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 11. Dimensionality Reduction -->
+        <section id="dimred" class="mb-5">
+          <h2>11. Dimensionality Reduction</h2>
+          <p>
+            Reduce features while preserving variance or structure. PCA is the most common technique.
+          </p>
+          <pre><code>from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 12. Feature Engineering -->
+        <section id="feature" class="mb-5">
+          <h2>12. Feature Engineering</h2>
+          <p>
+            Create new features (polynomial, interaction terms, binning) to improve model power.
+          </p>
+        </section>
+
+        <!-- 13. Pipelines -->
+        <section id="pipeline" class="mb-5">
+          <h2>13. Pipelines</h2>
+          <p>
+            Chain preprocessing and model steps to avoid data leakage and simplify workflows.
+          </p>
+          <pre><code>from sklearn.pipeline import Pipeline
+pipe = Pipeline([
+  ('scaler', StandardScaler()),
+  ('clf', RandomForestClassifier())
+])
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 14. Model Evaluation -->
+        <section id="eval" class="mb-5">
+          <h2>14. Model Evaluation</h2>
+          <p>
+            Use metrics like accuracy, precision, recall, F1, ROC-AUC to judge classification performance.
+          </p>
+        </section>
+
+        <!-- 15. Cross-Validation -->
+        <section id="cv" class="mb-5">
+          <h2>15. Cross-Validation</h2>
+          <p>
+            Evaluate model stability via k-fold splits or stratified sampling.
+          </p>
+          <pre><code>from sklearn.model_selection import cross_val_score
+scores = cross_val_score(clf, X, y, cv=5)
+print(scores.mean())</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 16. Hyperparameter Tuning -->
+        <section id="grid" class="mb-5">
+          <h2>16. Hyperparameter Tuning</h2>
+          <p>
+            Search best params via GridSearchCV or RandomizedSearchCV.
+          </p>
+          <pre><code>from sklearn.model_selection import GridSearchCV
+param_grid = {'n_estimators': [50,100,200]}
+grid = GridSearchCV(RandomForestClassifier(), param_grid, cv=3)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 17. Scaling & Normalization -->
+        <section id="scaling" class="mb-5">
+          <h2>17. Scaling &amp; Normalization</h2>
+          <p>
+            Standardize features to zero mean unit variance or scale to [0,1].
+          </p>
+          <pre><code>from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+</code></pre>
+          <div class="code-actions">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+        </section>
+
+        <!-- 18. Handling Imbalanced Data -->
+        <section id="imbalanced" class="mb-5">
+          <h2>18. Handling Imbalanced Data</h2>
+          <p>
+            Techniques: up/down sampling, SMOTE, class weighting in model algorithms.
+          </p>
+        </section>
+
+        <!-- 19. Model Interpretability -->
+        <section id="interpret" class="mb-5">
+          <h2>19. Model Interpretability</h2>
+          <p>
+            Tools like SHAP and LIME explain individual predictions and global feature importance.
+          </p>
+        </section>
+
+        <!-- 20. Mini-Projects -->
+        <section id="projects" class="mb-5">
+          <h2>20. Mini-Projects</h2>
+          <ul>
+            <li><strong>House Price Prediction:</strong> Use regression to predict prices from features.</li>
+            <li><strong>Spam Classifier:</strong> Build a text classifier using Naïve Bayes.</li>
+            <li><strong>Customer Segmentation:</strong> Cluster customers using K-Means.</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
   </div>
-</nav>
 
-<!-- Header -->
-<header class="header">
-  <h1>Machine Learning</h1>
-  <p class="lead">Build, train, and evaluate ML models using Python and scikit-learn.</p>
-</header>
-
-<!-- Lesson Content -->
-<section class="container py-5">
-
-  <h2>1. What is Machine Learning?</h2>
-  <p>Machine learning is a subset of artificial intelligence that allows systems to learn patterns from data and make predictions or decisions without being explicitly programmed.</p>
-
-  <h2 class="mt-4">2. Supervised Learning: Classification Example</h2>
-  <pre><code>from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-
-# Load dataset
-iris = load_iris()
-X_train, X_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2, random_state=42
-)
-
-# Train model
-clf = RandomForestClassifier()
-clf.fit(X_train, y_train)
-
-# Predict
-y_pred = clf.predict(X_test)
-print("Accuracy:", accuracy_score(y_test, y_pred))</code></pre>
-
-  <h2 class="mt-5">3. Evaluation Metrics</h2>
-  <ul>
-    <li><strong>Accuracy:</strong> Percentage of correct predictions</li>
-    <li><strong>Precision:</strong> TP / (TP + FP)</li>
-    <li><strong>Recall:</strong> TP / (TP + FN)</li>
-    <li><strong>F1-Score:</strong> Harmonic mean of precision and recall</li>
-  </ul>
-
-  <h2 class="mt-4">4. Practice Notebook</h2>
-  <p>Try training and evaluating models with your own datasets:</p>
-  <a href="https://colab.research.google.com/" target="_blank" class="btn btn-success">Open in Colab</a>
-
-  <div class="quiz-box mt-5">
-    <h4>Quiz: Which of the following is a supervised learning algorithm?</h4>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="quiz1" id="q1a1">
-      <label class="form-check-label" for="q1a1">K-Means Clustering</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="quiz1" id="q1a2">
-      <label class="form-check-label" for="q1a2">PCA (Principal Component Analysis)</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="quiz1" id="q1a3">
-      <label class="form-check-label" for="q1a3">Random Forest </label>
+  <!-- Editor Modal -->
+  <div id="editorModal" class="editor-modal">
+    <div class="editor-container">
+      <div class="editor-header">
+        <button onclick="closeEditor()" class="close-btn">&times;</button>
+      </div>
+      <div id="editor" class="editor"></div>
+      <div class="editor-actions">
+        <button onclick="runCode()" class="run-btn">Run ▶️</button>
+        <button onclick="checkCode()" class="check-btn">Check ✅</button>
+      </div>
+      <pre id="output" class="output"></pre>
+      <div id="checkResult" class="check-result"></div>
     </div>
   </div>
 
-</section>
+  <!-- JS Libraries & Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.11.2/ace.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+  <script>
+    AOS.init({ duration:700, once:true, anchorPlacement:'top-bottom' });
 
-<!-- Footer -->
-<footer class="text-center py-4 bg-dark text-light mt-5">
-  <p>© 2025 Tanvir Sardarr | <a href="https://github.com/tanvir153" class="text-warning">GitHub</a> | <a href="mailto:tanvir.xf@gmail.com" class="text-warning">Email</a></p>
-</footer>
+    // Pagination & Sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = Array.from(document.querySelectorAll('section'));
+      const perPage = 5, total = sections.length, totalPages = Math.ceil(total/perPage);
+      let current = 1;
+      const prev = document.getElementById('prevPageBtn'),
+            next = document.getElementById('nextPageBtn'),
+            ind  = document.getElementById('pageIndicator'),
+            links= Array.from(document.querySelectorAll('#lesson-nav a'));
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      function render() {
+        sections.forEach((s,i) => s.style.display = Math.floor(i/perPage)+1===current?'block':'none');
+        prev.disabled = current===1;
+        next.disabled = current===totalPages;
+        ind.textContent = `Page ${current} / ${totalPages}`;
+      }
+      prev.onclick = ()=>{ if(current>1) current--,render(); };
+      next.onclick = ()=>{ if(current<totalPages) current++,render(); };
+      links.forEach(l=>l.addEventListener('click', e=>{
+        e.preventDefault();
+        const id = l.getAttribute('href').slice(1),
+              idx= sections.findIndex(s=>s.id===id);
+        if(idx>-1){
+          current = Math.floor(idx/perPage)+1;
+          render();
+          document.getElementById(id).scrollIntoView({behavior:'smooth'});
+        }
+      }));
+      render();
+    });
+
+    // Copy-to-Clipboard
+    function copyCode(btn) {
+      const txt = btn.closest('section').querySelector('pre code').innerText;
+      navigator.clipboard.writeText(txt).then(()=>{
+        btn.textContent='Copied!';
+        setTimeout(()=>btn.textContent='Copy',1500);
+      });
+    }
+
+    // Try-It Modal
+    let editor, expected;
+    function openEditorModal(btn) {
+      const sec = btn.closest('section');
+      const code = sec.querySelector('pre code').innerText.trim();
+      expected = btn.dataset.expected || '';
+      document.getElementById('editorModal').style.display='flex';
+      if(!editor){
+        editor = ace.edit('editor');
+        editor.setTheme('ace/theme/github');
+        editor.session.setMode('ace/mode/python');
+      }
+      editor.setValue(code, -1);
+      document.getElementById('output').innerText='';
+      document.getElementById('checkResult').innerText='';
+    }
+    function closeEditor() {
+      document.getElementById('editorModal').style.display='none';
+    }
+    function runCode() {
+      const outf = txt=>document.getElementById('output').innerText+=txt;
+      const readf = f=>{
+        if(!Sk.builtinFiles?.files[f]) throw `File not found: ${f}`;
+        return Sk.builtinFiles.files[f];
+      };
+      document.getElementById('output').innerText='';
+      Sk.configure({output:outf,read:readf});
+      Sk.pre='output';
+      Sk.misceval.asyncToPromise(()=>Sk.importMainWithBody('<stdin>',false,editor.getValue()))
+        .catch(err=>outf(err.toString()));
+    }
+    function checkCode() {
+      const actual = document.getElementById('output').innerText.trim();
+      const res = document.getElementById('checkResult');
+      if(expected && actual===expected){
+        res.style.color='#198754'; res.textContent='✅ Correct!';
+      } else {
+        res.style.color='#dc3545';
+        res.textContent=`❌ Got "${actual}", expected "${expected}"`;
+      }
+    }
+  </script>
+
 </body>
 </html>
