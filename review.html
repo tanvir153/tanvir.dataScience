@@ -8,130 +8,153 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
     rel="stylesheet"/>
   <style>
-    body { font-family:'Segoe UI',sans-serif; background:#f8f9fa }
+    body { font-family:'Segoe UI',sans-serif; background:#f8f9fa; }
     .star { cursor:pointer; font-size:1.5rem; color:#ccc; }
     .star.filled { color:#ffc107; }
-    .review-card { background:#fff; padding:1rem; border-radius:.5rem; box-shadow:0 0 8px rgba(0,0,0,.05);}
+    .review-card { 
+      background:#fff; 
+      padding:1rem; 
+      border-radius:.5rem; 
+      box-shadow:0 0 8px rgba(0,0,0,.05);
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">Tanvir DS</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#">Reviews</a></li>
-      </ul>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Tanvir DS</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="review.html">Reviews</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<header class="bg-primary text-white text-center py-5 mb-4">
-  <h1>🌟 Student Reviews</h1>
-  <p class="lead">Leave your feedback below!</p>
-</header>
+  <!-- HEADER -->
+  <header class="bg-primary text-white text-center py-5 mb-4">
+    <h1>🌟 Student Reviews</h1>
+    <p class="lead">Leave your feedback below!</p>
+  </header>
 
-<div class="container">
+  <div class="container">
 
-  <!-- Review Form -->
-  <div class="card mb-5 p-4">
-    <h4>Submit a Review</h4>
-    <form id="reviewForm" class="row g-3">
-      <div class="col-md-6">
-        <label class="form-label">Name</label>
-        <input type="text" name="name" class="form-control" required/>
-      </div>
-      <div class="col-md-6">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" required/>
-      </div>
-
-      <div class="col-12">
-        <label class="form-label">Rating</label>
-        <div id="starContainer">
-          <span class="star" data-value="1">&#9733;</span>
-          <span class="star" data-value="2">&#9733;</span>
-          <span class="star" data-value="3">&#9733;</span>
-          <span class="star" data-value="4">&#9733;</span>
-          <span class="star" data-value="5">&#9733;</span>
+    <!-- REVIEW FORM -->
+    <div class="card mb-5 p-4">
+      <h4>Submit a Review</h4>
+      <form id="reviewForm" class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" required/>
         </div>
-        <input type="hidden" name="rating" id="rating" value="0" required/>
-      </div>
-
-      <div class="col-12">
-        <label class="form-label">Comment</label>
-        <textarea name="comment" class="form-control" rows="3" required></textarea>
-      </div>
-
-      <div class="col-12">
-        <button type="submit" class="btn btn-success">Submit Review</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Reviews List -->
-  <div id="reviewsList" class="row g-4">
-    <!-- Javascript will populate cards here -->
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const API_URL = 'YOUR_WEB_APP_URL_HERE'; // ← paste your Apps Script URL
-
-  // star rating UI
-  const stars = document.querySelectorAll('.star');
-  stars.forEach(star => {
-    star.addEventListener('click', () => {
-      const val = +star.dataset.value;
-      document.getElementById('rating').value = val;
-      stars.forEach(s => s.classList.toggle('filled', +s.dataset.value <= val));
-    });
-  });
-
-  // fetch & render reviews
-  async function loadReviews() {
-    const res = await fetch(API_URL);
-    const reviews = await res.json();
-    const container = document.getElementById('reviewsList');
-    container.innerHTML = reviews
-      .sort((a,b)=> new Date(b.timestamp) - new Date(a.timestamp))
-      .map(r => `
-        <div class="col-md-4">
-          <div class="review-card">
-            <h5>${r.name}</h5>
-            <p class="mb-1">
-              ${Array(r.rating).fill('&#9733;').join('')}
-              ${Array(5-r.rating).fill('&#9734;').join('')}
-            </p>
-            <p>${r.comment}</p>
-            <small class="text-muted">${new Date(r.timestamp).toLocaleString()}</small>
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" required/>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Rating</label>
+          <div id="starContainer">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
           </div>
+          <input type="hidden" name="rating" id="rating" value="0" required/>
         </div>
-      `).join('');
-  }
+        <div class="col-12">
+          <label class="form-label">Comment</label>
+          <textarea name="comment" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">Submit Review</button>
+        </div>
+      </form>
+    </div>
 
-  // form submission via AJAX
-  document.getElementById('reviewForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    try {
-      await fetch(API_URL, { method: 'POST', body: data });
-      form.reset();
-      stars.forEach(s => s.classList.remove('filled'));
-      loadReviews();
-      alert('Thank you! Your review has been submitted.');
-    } catch(err) {
-      console.error(err);
-      alert('Submission failed – please try again.');
+    <!-- REVIEWS LIST -->
+    <div id="reviewsList" class="row g-4">
+      <!-- JS will populate -->
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ← Replace with your deployed Web‐App exec URL:
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwtGPn3S5uiJ4yj1-0KIXy61E-KlCKwNWvEokj7i11Fj5RMHttqvXaeQkCe8IYg9E3g/exec';
+
+    // 1) STAR RATING INTERACTIONS
+    const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const v = +star.dataset.value;
+        document.getElementById('rating').value = v;
+        stars.forEach(s => s.classList.toggle('filled', +s.dataset.value <= v));
+      });
+    });
+
+    // 2) LOAD & RENDER REVIEWS
+    async function loadReviews() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const container = document.getElementById('reviewsList');
+        container.innerHTML = data
+          .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp))
+          .map(r => `
+            <div class="col-md-4">
+              <div class="review-card">
+                <h5>${r.name}</h5>
+                <p class="mb-1">
+                  ${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}
+                </p>
+                <p>${r.comment}</p>
+                <small class="text-muted">
+                  ${new Date(r.timestamp).toLocaleString()}
+                </small>
+              </div>
+            </div>
+          `).join('');
+      } catch(err) {
+        console.error('Could not load reviews:', err);
+      }
     }
-  });
 
-  // initial load
-  window.addEventListener('DOMContentLoaded', loadReviews);
-</script>
+    // 3) HANDLE FORM SUBMIT via AJAX
+    document.getElementById('reviewForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = e.target;
+      const body = new FormData(form);
+      try {
+        const resp = await fetch(API_URL, { method:'POST', body });
+        const json = await resp.json();
+        if (json.status === 'success') {
+          form.reset();
+          stars.forEach(s => s.classList.remove('filled'));
+          await loadReviews();
+          alert('✅ Thank you! Your review has been submitted.');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch(err) {
+        console.error(err);
+        alert('❌ Submission failed – please try again.');
+      }
+    });
+
+    // 4) INITIAL LOAD
+    window.addEventListener('DOMContentLoaded', loadReviews);
+  </script>
 </body>
 </html>
